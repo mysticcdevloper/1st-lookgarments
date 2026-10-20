@@ -30,23 +30,23 @@ export const AboutPage: React.FC = () => {
             The Fixed Price Shop • Ghanta Ghar, Ghaziabad
           </span>
 
-          <h1 className="font-editorial text-4xl sm:text-6xl font-normal text-dark tracking-tight leading-[1.12] mb-6">
+          <h1 className="font-editorial text-3xl sm:text-6xl font-normal text-dark tracking-tight leading-[1.12] mb-4 sm:mb-6">
             Clothing Built on <br />
             <span className="italic text-brand font-light">Honest Quality.</span>
           </h1>
 
-          <p className="font-editorial italic text-xl sm:text-2xl text-neutral-700 leading-snug mb-8">
+          <p className="font-editorial italic text-lg sm:text-2xl text-neutral-700 leading-snug mb-5 sm:mb-8">
             “{BUSINESS_CONFIG.officialSlogan}”
           </p>
 
-          <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-light max-w-2xl mx-auto">
+          <p className="text-xs sm:text-base text-neutral-600 leading-relaxed font-light max-w-2xl mx-auto">
             1st Look Garments is a retail and wholesale clothing establishment located in the heart of Ghaziabad at Ramanuj Dayal Market, Ghanta Ghar. We believe true fashion value comes not from promotional gimmicks, but from superior fabric touch, reliable construction, and direct, fair pricing.
           </p>
 
         </div>
 
         {/* Visual Asymmetric Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-12 border-y border-borderSoft">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center py-8 sm:py-12 border-y border-borderSoft">
           
           <div className="lg:col-span-6 relative">
             <div className="aspect-[4/3] rounded-xs overflow-hidden shadow-xl border border-neutral-200 group">

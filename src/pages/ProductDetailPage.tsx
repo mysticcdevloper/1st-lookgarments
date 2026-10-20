@@ -65,7 +65,7 @@ export const ProductDetailPage: React.FC = () => {
         />
 
         {/* Product Presentation Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 mt-4 sm:mt-6">
           
           {/* Left Column: Image Gallery */}
           <div className="lg:col-span-7 space-y-4">
@@ -354,7 +354,7 @@ export const ProductDetailPage: React.FC = () => {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6">
               {relatedProducts.map((rel) => (
                 <ProductCard key={rel.id} product={rel} />
               ))}

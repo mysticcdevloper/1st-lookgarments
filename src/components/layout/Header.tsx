@@ -7,7 +7,8 @@ import {
   ChevronDown, 
   Phone, 
   MapPin, 
-  ArrowUpRight 
+  ArrowUpRight,
+  MessageCircle
 } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../../config/business';
 import { buildWhatsAppUrl } from '../../utils/whatsapp';
@@ -20,13 +21,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
+  const [mobileSearchQuery, setMobileSearchQuery] = useState('');
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 15);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -36,6 +38,18 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
     setCategoryDropdownOpen(false);
   }, [location.pathname]);
 
+  // Lock background scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   const whatsappGeneralUrl = buildWhatsAppUrl(
     'Hello 1st Look Garments, I would like to inquire about your clothing collection and store visits.'
   );
@@ -44,49 +58,44 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
     <header 
       className={`sticky top-0 z-40 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-100 py-2.5' 
-          : 'bg-white border-b border-borderSoft py-3.5'
+          ? 'bg-white/98 backdrop-blur-md shadow-sm border-b border-neutral-100 py-2 sm:py-2.5' 
+          : 'bg-white border-b border-borderSoft py-2.5 sm:py-3.5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between min-h-[52px] sm:min-h-[58px]">
           
-          {/* Mobile Menu Button */}
-          <div className="flex items-center lg:hidden">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 -ml-2 text-dark hover:text-brand focus:outline-none focus:ring-2 focus:ring-brand rounded-sm transition-colors"
-              aria-label="Toggle navigation menu"
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-
-          {/* Brand Logo & Slogan Sub-label */}
-          <div className="flex items-center space-x-3">
-            <Link 
-              to="/" 
-              className="flex items-center group transition-transform hover:opacity-95"
-              aria-label="1st Look Garments Homepage"
-            >
+          {/* Left Brand Identity: Logo + 2-Line Shop Name (Always together on all screen sizes) */}
+          <Link 
+            to="/" 
+            className="flex items-center group transition-transform hover:opacity-95 shrink-0 max-w-[65%] sm:max-w-none"
+            aria-label="1st Look Garments Homepage"
+          >
+            {/* Official Circular Logo */}
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden border border-neutral-200/90 shadow-2xs shrink-0 bg-white flex items-center justify-center">
               <img
                 src="/assets/logo.png"
-                alt="1st Look Garments Official Circular Logo"
-                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain rounded-full border border-neutral-200/80 shadow-xs group-hover:scale-102 transition-transform duration-300"
+                alt="1st Look Garments Official Logo"
+                className="w-full h-full object-contain p-0.5 group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="ml-3 hidden sm:block">
-                <span className="block font-editorial text-lg md:text-xl font-bold tracking-tight text-dark group-hover:text-brand transition-colors">
-                  1ST LOOK GARMENTS
-                </span>
-                <span className="block text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-neutral-500 font-medium">
-                  Ghanta Ghar • Ghaziabad
-                </span>
-              </div>
-            </Link>
-          </div>
+            </div>
 
-          {/* Desktop Navigation with Smooth Hover Underline Animation */}
+            {/* Shop Name: 2 Compact Lines as Requested */}
+            <div className="ml-2 sm:ml-3 flex flex-col justify-center min-w-0">
+              <span className="font-editorial text-sm sm:text-base md:text-xl font-bold tracking-tight text-dark leading-none group-hover:text-brand transition-colors whitespace-nowrap">
+                1ST LOOK
+              </span>
+              <span className="font-editorial text-xs sm:text-sm md:text-base font-semibold tracking-wider text-brand leading-none mt-0.5 sm:mt-1 whitespace-nowrap">
+                GARMENTS
+              </span>
+              {/* Optional Subtitle when width permits */}
+              <span className="hidden md:block text-[9px] md:text-[10px] tracking-[0.18em] uppercase text-neutral-400 font-medium leading-tight mt-0.5 truncate">
+                Ghanta Ghar • Ghaziabad
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation (lg+) */}
           <nav className="hidden lg:flex items-center space-x-7" aria-label="Main Navigation">
             <NavLink
               to="/"
@@ -200,10 +209,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             </NavLink>
           </nav>
 
-          {/* Right Action Icons & Direct WhatsApp Action */}
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            
-            {/* Single Clean Search Button */}
+          {/* Desktop Right Action Icons (lg+) */}
+          <div className="hidden lg:flex items-center space-x-3 sm:space-x-4">
             <button
               type="button"
               onClick={onOpenSearch}
@@ -214,85 +221,171 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               <Search className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
-            {/* Direct Phone Link */}
             <a
               href={`tel:${BUSINESS_CONFIG.contact.phoneTel}`}
-              className="hidden sm:inline-flex items-center space-x-1.5 text-xs text-neutral-700 hover:text-brand font-medium transition-colors p-2"
+              className="inline-flex items-center space-x-1.5 text-xs text-neutral-700 hover:text-brand font-medium transition-colors p-2"
               title="Call 1st Look Garments"
             >
               <Phone className="w-4 h-4 text-brand" />
               <span className="hidden xl:inline">{BUSINESS_CONFIG.contact.phoneDisplay}</span>
             </a>
 
-            {/* Direct WhatsApp CTA Button with Smooth Hover / Scale Animation */}
             <a
               href={whatsappGeneralUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-1.5 bg-brand hover:bg-brand-dark hover:shadow-md hover:scale-103 active:scale-97 text-white px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-medium uppercase tracking-widest rounded-sm shadow-xs transition-all duration-300"
+              className="inline-flex items-center space-x-1.5 bg-brand hover:bg-brand-dark hover:shadow-md hover:scale-103 active:scale-97 text-white px-4 py-2 text-xs font-medium uppercase tracking-widest rounded-sm shadow-xs transition-all duration-300"
             >
               <span>WhatsApp</span>
             </a>
           </div>
+
+          {/* Mobile Right Controls: [Search (optional)] [Compact WhatsApp] [Menu] (lg:hidden) */}
+          <div className="flex items-center space-x-1 sm:space-x-2 lg:hidden shrink-0">
+            {/* Search Button on Mobile */}
+            <button
+              type="button"
+              onClick={onOpenSearch}
+              className="w-10 h-10 flex items-center justify-center text-neutral-700 hover:text-brand rounded-xs transition-colors"
+              aria-label="Search garments"
+              title="Search catalog"
+            >
+              <Search className="w-4 h-4" />
+            </button>
+
+            {/* Compact WhatsApp Button: Proportional, Not Oversized */}
+            <a
+              href={whatsappGeneralUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center space-x-1 bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1.5 rounded-xs text-[10px] font-semibold uppercase tracking-wider transition-colors min-h-[36px] active:scale-95 shadow-2xs"
+              aria-label="Chat with 1st Look Garments on WhatsApp"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span className="hidden xs:inline">WhatsApp</span>
+            </a>
+
+            {/* Hamburger Menu Toggle Button at Far Right */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="w-11 h-11 flex items-center justify-center text-dark hover:text-brand focus:outline-none rounded-xs transition-colors"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6 text-brand" />
+              ) : (
+                <Menu className="w-6 h-6 text-dark" />
+              )}
+            </button>
+          </div>
+
         </div>
       </div>
 
       {/* Mobile Slide-Out Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 top-[60px] z-50 lg:hidden flex">
+        <div 
+          className="fixed inset-0 top-0 z-50 lg:hidden flex"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation Menu"
+        >
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity duration-300"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity duration-300"
             onClick={() => setMobileMenuOpen(false)}
           />
 
           {/* Drawer Content */}
-          <div className="relative w-4/5 max-w-sm bg-white h-full shadow-2xl flex flex-col justify-between overflow-y-auto p-6 z-10 border-r border-neutral-200 animate-fadeIn">
+          <div className="relative w-[85%] max-w-sm bg-white h-full shadow-2xl flex flex-col justify-between overflow-y-auto p-5 sm:p-6 z-10 border-r border-neutral-200 animate-fadeIn">
             <div>
-              {/* Header brand tag */}
-              <div className="pb-4 mb-4 border-b border-neutral-100">
-                <span className="text-[10px] uppercase tracking-widest text-brand font-semibold">
-                  The Fixed Price Shop
-                </span>
-                <h3 className="font-editorial text-lg font-bold text-dark mt-0.5">
-                  1st Look Garments
-                </h3>
-                <p className="text-xs text-neutral-500 mt-1 flex items-center">
-                  <MapPin className="w-3.5 h-3.5 mr-1 text-brand shrink-0" />
-                  Ghanta Ghar, Ghaziabad
-                </p>
+              {/* Drawer Top Header with Close Button */}
+              <div className="flex items-center justify-between pb-4 mb-4 border-b border-neutral-100">
+                <div className="flex items-center space-x-2.5">
+                  <img
+                    src="/assets/logo.png"
+                    alt="1st Look Garments Logo"
+                    className="w-10 h-10 object-contain rounded-full border border-neutral-200"
+                  />
+                  <div>
+                    <span className="font-editorial text-sm font-bold text-dark block leading-none">
+                      1ST LOOK GARMENTS
+                    </span>
+                    <span className="text-[9px] uppercase tracking-wider text-brand font-semibold block mt-0.5">
+                      The Fixed Price Shop
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center text-dark hover:text-brand transition-colors"
+                  aria-label="Close navigation menu"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
 
-              {/* Nav links */}
-              <div className="space-y-4">
+              {/* Quick Search inside Drawer */}
+              <div className="mb-5">
+                <form 
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (onOpenSearch) onOpenSearch();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="relative"
+                >
+                  <input
+                    type="text"
+                    placeholder="Search shirts, blazers, trousers..."
+                    value={mobileSearchQuery}
+                    onChange={(e) => setMobileSearchQuery(e.target.value)}
+                    onClick={() => {
+                      if (onOpenSearch) onOpenSearch();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full pl-9 pr-3 py-2 bg-neutral-50 border border-neutral-200 rounded-xs text-xs text-dark placeholder:text-neutral-400 focus:outline-none focus:border-dark"
+                  />
+                  <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                </form>
+              </div>
+
+              {/* Navigation Links */}
+              <nav className="space-y-3.5" aria-label="Mobile Drawer Navigation">
                 <Link
                   to="/"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
                 >
                   Home
                 </Link>
                 <Link
                   to="/shop"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
                 >
                   Shop All Collections
                 </Link>
                 <Link
                   to="/new-arrivals"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
                 >
                   New Arrivals
                 </Link>
 
                 {/* Categories Sub-tree */}
-                <div className="py-2 pl-3 border-l-2 border-brand/40 space-y-2.5">
+                <div className="py-2 pl-3 border-l-2 border-brand/50 space-y-2">
                   <div className="text-[10px] uppercase tracking-wider text-neutral-400 font-bold">
-                    Categories
+                    Collections & Categories
                   </div>
                   {BUSINESS_CONFIG.categories.map((c) => (
                     <Link
                       key={c.id}
                       to={c.path}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block text-xs font-medium text-neutral-700 hover:text-brand"
                     >
                       {c.name}
@@ -302,55 +395,68 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
 
                 <Link
                   to="/wholesale"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
                 >
                   Wholesale & Bulk
                 </Link>
                 <Link
                   to="/visit-store"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
                 >
                   Visit Ghanta Ghar Store
                 </Link>
                 <Link
                   to="/about"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
                 >
                   About The Brand
                 </Link>
                 <Link
                   to="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
                 >
                   Contact & Directions
                 </Link>
                 <Link
                   to="/faq"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
                 >
                   FAQ & Inquiries
                 </Link>
-              </div>
+              </nav>
             </div>
 
-            {/* Bottom contact info in drawer */}
-            <div className="pt-6 mt-6 border-t border-neutral-100">
+            {/* Bottom Contact Info in Drawer */}
+            <div className="pt-5 mt-5 border-t border-neutral-100 space-y-2.5">
+              <div className="text-[11px] text-neutral-500 mb-2 flex items-center">
+                <MapPin className="w-3.5 h-3.5 mr-1 text-brand shrink-0" />
+                <span>Ramanuj Dayal Market, Ghanta Ghar</span>
+              </div>
+              
               <a
                 href={whatsappGeneralUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center space-x-2 bg-brand text-white py-2.5 rounded-xs text-xs uppercase tracking-widest font-semibold shadow-xs mb-3 hover:bg-brand-dark transition-colors"
+                className="w-full flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xs text-xs uppercase tracking-widest font-semibold shadow-xs transition-colors"
               >
-                <span>WhatsApp Us</span>
+                <MessageCircle className="w-4 h-4" />
+                <span>Chat on WhatsApp</span>
               </a>
+
               <a
                 href={`tel:${BUSINESS_CONFIG.contact.phoneTel}`}
                 className="w-full flex items-center justify-center space-x-2 border border-neutral-300 py-2.5 rounded-xs text-xs uppercase tracking-widest font-medium text-neutral-800 hover:bg-neutral-50 transition-colors"
               >
                 <Phone className="w-3.5 h-3.5 text-brand" />
-                <span>Call +91 98915 17860</span>
+                <span>Call {BUSINESS_CONFIG.contact.phoneDisplay}</span>
               </a>
             </div>
+
           </div>
         </div>
       )}

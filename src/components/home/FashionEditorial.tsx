@@ -4,17 +4,17 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 
 export const FashionEditorial: React.FC = () => {
   return (
-    <section className="py-20 md:py-28 bg-[#0D0D0D] text-white relative overflow-hidden">
+    <section className="py-12 sm:py-20 md:py-28 bg-[#0D0D0D] text-white relative overflow-hidden">
       
       {/* Editorial Decorative Background Watermark */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none opacity-[0.03] text-white font-editorial text-[18vw] leading-none whitespace-nowrap font-bold">
         1ST LOOK
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
         
         {/* Asymmetrical Split Screen Composition */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
           
           {/* Left Column: Visual Editorial Collage */}
           <div className="lg:col-span-7 relative">
@@ -30,11 +30,11 @@ export const FashionEditorial: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
               
               {/* Overlay handwritten script accent inspired by reference moodboard */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <span className="font-script text-3xl sm:text-4xl text-brand font-medium block drop-shadow-md">
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
+                <span className="font-script text-2xl sm:text-4xl text-brand font-medium block drop-shadow-md">
                   Looking for our stories
                 </span>
-                <span className="text-[10px] tracking-widest uppercase text-neutral-300 font-semibold mt-1 block">
+                <span className="text-[9px] sm:text-[10px] tracking-widest uppercase text-neutral-300 font-semibold mt-1 block">
                   Campaign 2026 • 1st Look Garments Ghaziabad
                 </span>
               </div>

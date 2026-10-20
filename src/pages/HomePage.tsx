@@ -38,14 +38,14 @@ export const HomePage: React.FC = () => {
 
       {/* New Arrivals Grid */}
       <ScrollReveal>
-        <section className="py-20 bg-ivory/60 border-t border-borderSoft">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-4 border-b border-borderSoft gap-4">
+        <section className="py-12 sm:py-20 bg-ivory/60 border-t border-borderSoft">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 pb-3 sm:pb-4 border-b border-borderSoft gap-3 sm:gap-4">
               <div>
-                <span className="text-xs uppercase tracking-widest text-brand font-semibold block mb-2">
+                <span className="text-[10px] sm:text-xs uppercase tracking-widest text-brand font-semibold block mb-1.5 sm:mb-2">
                   Fresh From Ghanta Ghar
                 </span>
-                <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl font-normal text-dark tracking-tight">
+                <h2 className="font-editorial text-2xl sm:text-4xl md:text-5xl font-normal text-dark tracking-tight">
                   Our New Arrivals
                 </h2>
               </div>
@@ -59,16 +59,16 @@ export const HomePage: React.FC = () => {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6">
               {newArrivals.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
 
-            <div className="mt-12 text-center">
+            <div className="mt-8 sm:mt-12 text-center">
               <Link
                 to="/shop"
-                className="inline-flex items-center space-x-2 bg-dark hover:bg-brand text-white px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded-xs transition-all duration-300 shadow-xs hover:shadow-lg hover:-translate-y-0.5"
+                className="inline-flex items-center space-x-2 bg-dark hover:bg-brand text-white px-6 py-3 sm:px-8 sm:py-4 text-xs font-semibold uppercase tracking-widest rounded-xs transition-all duration-300 shadow-xs hover:shadow-lg hover:-translate-y-0.5"
               >
                 <span>Discover Full Catalog</span>
                 <ArrowUpRight className="w-4 h-4" />

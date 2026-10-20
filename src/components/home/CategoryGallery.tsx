@@ -5,16 +5,16 @@ import { BUSINESS_CONFIG } from '../../config/business';
 
 export const CategoryGallery: React.FC = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-4 border-b border-borderSoft gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 pb-3 sm:pb-4 border-b border-borderSoft gap-3 sm:gap-4">
           <div>
-            <span className="text-xs uppercase tracking-widest text-brand font-semibold block mb-2">
+            <span className="text-[10px] sm:text-xs uppercase tracking-widest text-brand font-semibold block mb-1.5 sm:mb-2">
               Curated Wardrobe
             </span>
-            <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl font-normal text-dark tracking-tight">
+            <h2 className="font-editorial text-2xl sm:text-4xl md:text-5xl font-normal text-dark tracking-tight">
               Shop by Category
             </h2>
           </div>
@@ -29,7 +29,7 @@ export const CategoryGallery: React.FC = () => {
         </div>
 
         {/* Editorial Asymmetric Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6">
           {BUSINESS_CONFIG.categories.map((category, idx) => {
             // Give the first category a larger card feel
             const isFeatured = idx === 0;
@@ -39,7 +39,7 @@ export const CategoryGallery: React.FC = () => {
                 key={category.id}
                 to={category.path}
                 className={`group relative overflow-hidden rounded-xs bg-dark block ${
-                  isFeatured ? 'sm:col-span-2 lg:col-span-1 lg:row-span-2 min-h-[420px] lg:min-h-full' : 'min-h-[320px]'
+                  isFeatured ? 'sm:col-span-2 lg:col-span-1 lg:row-span-2 min-h-[260px] sm:min-h-[420px] lg:min-h-full' : 'min-h-[200px] sm:min-h-[320px]'
                 }`}
               >
                 {/* Background Category Image */}
@@ -54,25 +54,26 @@ export const CategoryGallery: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
 
                 {/* Content Overlay */}
-                <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-between">
+                <div className="absolute inset-0 p-4 sm:p-8 flex flex-col justify-between">
                   <div className="flex justify-between items-start">
-                    <span className="text-[11px] uppercase tracking-widest text-white/70 font-semibold bg-dark/60 backdrop-blur-xs px-2.5 py-1 rounded-2xs">
+                    <span className="text-[10px] sm:text-[11px] uppercase tracking-widest text-white/70 font-semibold bg-dark/60 backdrop-blur-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-2xs">
                       Category 0{idx + 1}
                     </span>
-                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-brand group-hover:scale-110 transition-all duration-300">
-                      <ArrowUpRight className="w-5 h-5" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-brand group-hover:scale-110 transition-all duration-300">
+                      <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                   </div>
 
                   <div>
-                    <h3 className="font-editorial text-2xl sm:text-3xl text-white font-normal mb-2 group-hover:text-ivory transition-colors">
+                    <h3 className="font-editorial text-xl sm:text-3xl text-white font-normal mb-1 sm:mb-2 group-hover:text-ivory transition-colors">
                       {category.name}
                     </h3>
                     <p className="text-xs text-neutral-300 font-light leading-relaxed max-w-sm line-clamp-2">
                       {category.description}
                     </p>
-                    <div className="mt-4 inline-flex items-center text-xs font-semibold uppercase tracking-widest text-brand group-hover:text-white transition-colors">
+                    <div className="mt-2.5 sm:mt-4 inline-flex items-center text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-brand group-hover:text-white transition-colors">
                       <span>Explore Collection</span>
+                      <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 ml-1" />
                     </div>
                   </div>
                 </div>

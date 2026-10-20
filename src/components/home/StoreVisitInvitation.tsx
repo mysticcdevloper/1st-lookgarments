@@ -10,39 +10,39 @@ export const StoreVisitInvitation: React.FC = () => {
   );
 
   return (
-    <section className="py-20 md:py-28 bg-ivory border-t border-borderSoft">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-20 md:py-28 bg-ivory border-t border-borderSoft">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
         <div className="bg-white border border-borderSoft rounded-xs shadow-subtle overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12">
             
             {/* Left Column: Store Details & Actions */}
-            <div className="lg:col-span-7 p-8 sm:p-12 md:p-16 flex flex-col justify-between">
+            <div className="lg:col-span-7 p-5 sm:p-10 md:p-16 flex flex-col justify-between">
               <div>
-                <span className="text-xs uppercase tracking-widest text-brand font-semibold block mb-2">
+                <span className="text-[10px] sm:text-xs uppercase tracking-widest text-brand font-semibold block mb-1.5 sm:mb-2">
                   Physical Store Experience
                 </span>
-                <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl font-normal text-dark tracking-tight mb-4">
+                <h2 className="font-editorial text-2xl sm:text-4xl md:text-5xl font-normal text-dark tracking-tight mb-3 sm:mb-4">
                   YOUR NEXT LOOK <br />
                   <span className="italic text-neutral-500 font-light">STARTS HERE.</span>
                 </h2>
 
-                <p className="text-sm sm:text-base text-neutral-600 font-light leading-relaxed mb-8 max-w-lg">
+                <p className="text-xs sm:text-base text-neutral-600 font-light leading-relaxed mb-6 sm:mb-8 max-w-lg">
                   Feel the fabric weight, test the stretch, and experience personalized fit guidance in person. Located conveniently in Ramanuj Dayal Market, Ghanta Ghar, Ghaziabad.
                 </p>
 
                 {/* Address Box */}
-                <div className="bg-ivory border border-borderSoft p-5 rounded-xs mb-8">
-                  <div className="flex items-start space-x-3">
-                    <MapPin className="w-5 h-5 text-brand shrink-0 mt-0.5" />
+                <div className="bg-ivory border border-borderSoft p-3.5 sm:p-5 rounded-xs mb-6 sm:mb-8">
+                  <div className="flex items-start space-x-2.5 sm:space-x-3">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-brand shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-xs uppercase tracking-wider font-bold text-dark mb-1">
+                      <h4 className="text-[11px] sm:text-xs uppercase tracking-wider font-bold text-dark mb-1">
                         1st Look Garments Store
                       </h4>
                       <address className="not-italic text-xs text-neutral-600 leading-relaxed">
                         {BUSINESS_CONFIG.contact.address.fullAddress}
                       </address>
-                      <p className="text-[11px] text-neutral-400 mt-1">
+                      <p className="text-[10px] sm:text-[11px] text-neutral-400 mt-1">
                         Landmark: Near Ramte Ram Road, Ghanta Ghar Clock Tower Market
                       </p>
                     </div>
@@ -50,12 +50,12 @@ export const StoreVisitInvitation: React.FC = () => {
                 </div>
 
                 {/* Primary Action Buttons */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-2.5 sm:mb-4">
                   <a
                     href={BUSINESS_CONFIG.contact.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center space-x-2 bg-dark hover:bg-neutral-800 text-white py-3.5 px-5 text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors"
+                    className="inline-flex items-center justify-center space-x-2 bg-dark hover:bg-neutral-800 text-white py-3 px-4 sm:py-3.5 sm:px-5 text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors"
                   >
                     <MapPin className="w-4 h-4 text-brand" />
                     <span>Get Directions</span>
@@ -64,14 +64,14 @@ export const StoreVisitInvitation: React.FC = () => {
 
                   <Link
                     to="/visit-store"
-                    className="inline-flex items-center justify-center space-x-2 bg-brand hover:bg-brand-dark text-white py-3.5 px-5 text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors"
+                    className="inline-flex items-center justify-center space-x-2 bg-brand hover:bg-brand-dark text-white py-3 px-4 sm:py-3.5 sm:px-5 text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors"
                   >
                     <Calendar className="w-4 h-4" />
                     <span>Book Store Visit</span>
                   </Link>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                   <a
                     href={`tel:${BUSINESS_CONFIG.contact.phoneTel}`}
                     className="inline-flex items-center justify-center space-x-2 border border-neutral-300 hover:border-dark text-dark py-3 px-4 text-xs font-medium uppercase tracking-widest rounded-xs hover:bg-neutral-50 transition-colors"
@@ -101,7 +101,7 @@ export const StoreVisitInvitation: React.FC = () => {
             </div>
 
             {/* Right Column: Actual Storefront Photograph */}
-            <div className="lg:col-span-5 relative min-h-[400px] lg:min-h-full bg-neutral-100 overflow-hidden group">
+            <div className="lg:col-span-5 relative min-h-[300px] sm:min-h-[400px] lg:min-h-full bg-neutral-100 overflow-hidden group">
               <img
                 src="/assets/1st-look-garments-store.jpg"
                 alt="1st Look Garments Storefront in Ghanta Ghar Ghaziabad"
@@ -109,20 +109,20 @@ export const StoreVisitInvitation: React.FC = () => {
                 className="w-full h-full object-cover object-[center_20%] transition-transform duration-700 group-hover:scale-105"
               />
               {/* Subtle bottom vignette to ensure caption readability without darkening the storefront or signboard */}
-              <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-dark/90 via-dark/35 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-36 sm:h-44 bg-gradient-to-t from-dark/90 via-dark/35 to-transparent pointer-events-none" />
 
               {/* Overlay Badge */}
-              <div className="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
-                <div className="inline-flex items-center space-x-1.5 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-xs border border-white/10 mb-2">
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white pointer-events-none">
+                <div className="inline-flex items-center space-x-1.5 bg-black/60 backdrop-blur-md px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-xs border border-white/10 mb-1.5 sm:mb-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[10px] uppercase tracking-widest text-brand font-bold">
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-brand font-bold">
                     Official Storefront • Ghanta Ghar
                   </span>
                 </div>
-                <h3 className="font-editorial text-2xl font-normal text-white drop-shadow-sm">
+                <h3 className="font-editorial text-xl sm:text-2xl font-normal text-white drop-shadow-sm">
                   Visit Us in Person
                 </h3>
-                <p className="text-xs text-neutral-200 mt-1 font-light leading-relaxed drop-shadow-sm max-w-sm">
+                <p className="text-[11px] sm:text-xs text-neutral-200 mt-1 font-light leading-relaxed drop-shadow-sm max-w-sm">
                   Experience our complete fabric and fit collection in person at Ramanuj Dayal Market.
                 </p>
               </div>

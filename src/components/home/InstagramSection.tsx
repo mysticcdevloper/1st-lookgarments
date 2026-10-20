@@ -31,21 +31,21 @@ export const InstagramSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-white border-t border-borderSoft">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-20 bg-white border-t border-borderSoft">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
           <div className="inline-flex items-center space-x-2 text-brand text-xs uppercase tracking-widest font-semibold mb-2">
             <Instagram className="w-4 h-4" />
             <span>@1stlookgarments</span>
           </div>
 
-          <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl font-normal text-dark tracking-tight mb-4">
+          <h2 className="font-editorial text-2xl sm:text-4xl md:text-5xl font-normal text-dark tracking-tight mb-2 sm:mb-4">
             FOLLOW YOUR STYLE.
           </h2>
 
-          <p className="text-sm sm:text-base text-neutral-600 font-light leading-relaxed mb-6">
+          <p className="text-xs sm:text-base text-neutral-600 font-light leading-relaxed mb-4 sm:mb-6">
             Explore more looks, discover new inspiration, and stay connected with 1st Look Garments on Instagram.
           </p>
 
@@ -53,7 +53,7 @@ export const InstagramSection: React.FC = () => {
             href={BUSINESS_CONFIG.contact.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 bg-dark hover:bg-brand text-white px-6 py-3 text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors"
+            className="inline-flex items-center space-x-2 bg-dark hover:bg-brand text-white px-5 py-2.5 sm:px-6 sm:py-3 text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors"
           >
             <span>Follow on Instagram</span>
             <ArrowUpRight className="w-4 h-4" />
@@ -61,7 +61,7 @@ export const InstagramSection: React.FC = () => {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4">
           {instagramPosts.map((post) => (
             <a
               key={post.id}

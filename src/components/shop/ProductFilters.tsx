@@ -62,35 +62,37 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
         </div>
 
         {/* Right side controls: Sort, Count, Mobile Toggle */}
-        <div className="flex items-center justify-between lg:justify-end space-x-3">
+        <div className="flex flex-wrap items-center justify-between lg:justify-end gap-2 sm:space-x-3">
           
-          <span className="text-xs text-neutral-500 font-medium whitespace-nowrap">
+          <span className="text-[11px] sm:text-xs text-neutral-500 font-medium whitespace-nowrap">
             Showing <strong className="text-dark">{totalCount}</strong> garments
           </span>
 
-          {/* Sort Dropdown */}
           <div className="flex items-center space-x-2">
-            <ArrowUpDown className="w-3.5 h-3.5 text-neutral-400" />
-            <select
-              value={filters.sortBy}
-              onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value as FilterState['sortBy'] })}
-              className="bg-neutral-50 border border-neutral-200 text-xs py-2 px-2.5 rounded-xs text-dark focus:outline-none focus:border-dark cursor-pointer font-medium"
-            >
-              <option value="featured">Featured Collections</option>
-              <option value="newest">New Arrivals First</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-            </select>
-          </div>
+            {/* Sort Dropdown */}
+            <div className="flex items-center space-x-1.5">
+              <ArrowUpDown className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-neutral-400" />
+              <select
+                value={filters.sortBy}
+                onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value as FilterState['sortBy'] })}
+                className="bg-neutral-50 border border-neutral-200 text-[11px] sm:text-xs py-1.5 sm:py-2 px-2 sm:px-2.5 rounded-xs text-dark focus:outline-none focus:border-dark cursor-pointer font-medium max-w-[140px] sm:max-w-none"
+              >
+                <option value="featured">Featured Collections</option>
+                <option value="newest">New Arrivals First</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
 
-          {/* Mobile Filter Toggle */}
-          <button
-            onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
-            className="lg:hidden flex items-center space-x-1.5 border border-neutral-200 px-3 py-2 text-xs font-medium text-dark rounded-xs"
-          >
-            <SlidersHorizontal className="w-3.5 h-3.5" />
-            <span>Filters</span>
-          </button>
+            {/* Mobile Filter Toggle */}
+            <button
+              onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
+              className="lg:hidden flex items-center space-x-1 border border-neutral-200 px-2.5 py-1.5 text-[11px] font-medium text-dark rounded-xs"
+            >
+              <SlidersHorizontal className="w-3 h-3" />
+              <span>Filters</span>
+            </button>
+          </div>
 
           {/* Reset Filters button */}
           {hasActiveFilters && (

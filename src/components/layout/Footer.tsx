@@ -16,24 +16,24 @@ export const Footer: React.FC = () => {
   );
 
   return (
-    <footer className="bg-dark text-white pt-16 pb-12 border-t border-neutral-900">
+    <footer className="bg-dark text-white pt-10 sm:pt-16 pb-8 sm:pb-12 border-t border-neutral-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Brand Slogan Editorial Banner */}
-        <div className="pb-12 mb-12 border-b border-neutral-800 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="pb-8 sm:pb-12 mb-8 sm:mb-12 border-b border-neutral-800 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6">
           <div>
-            <span className="text-xs uppercase tracking-widest text-brand font-semibold block mb-2">
+            <span className="text-[10px] sm:text-xs uppercase tracking-widest text-brand font-semibold block mb-1.5 sm:mb-2">
               {BUSINESS_CONFIG.secondaryTagline}
             </span>
-            <h2 className="font-editorial text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight text-ivory">
+            <h2 className="font-editorial text-xl sm:text-3xl md:text-4xl font-normal tracking-tight text-ivory">
               “{BUSINESS_CONFIG.officialSlogan}”
             </h2>
           </div>
 
-          <div className="flex items-center space-x-3 shrink-0">
+          <div className="flex items-center space-x-2.5 sm:space-x-3 shrink-0">
             <Link
               to="/visit-store"
-              className="bg-brand hover:bg-brand-dark text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors"
+              className="bg-brand hover:bg-brand-dark text-white px-4 py-2 sm:px-5 sm:py-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors"
             >
               Plan Store Visit
             </Link>
@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-neutral-700 hover:border-white text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors"
+              className="border border-neutral-700 hover:border-white text-white px-4 py-2 sm:px-5 sm:py-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors"
             >
               WhatsApp Us
             </a>
@@ -49,7 +49,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Main Footer Links Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-neutral-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 pb-8 sm:pb-12 border-b border-neutral-800">
           
           {/* Column 1: Brand Info & Logo */}
           <div className="lg:col-span-2 space-y-4">

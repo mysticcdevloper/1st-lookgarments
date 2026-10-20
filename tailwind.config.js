@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '380px',
+      },
       colors: {
         brand: {
           DEFAULT: '#C8102E', // Official logo accent red

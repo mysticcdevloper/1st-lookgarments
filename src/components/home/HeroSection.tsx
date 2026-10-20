@@ -122,7 +122,7 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section 
-      className="relative min-h-[85vh] md:min-h-[90vh] flex items-center bg-[#111111] overflow-hidden select-none"
+      className="relative min-h-[72vh] sm:min-h-[82vh] lg:min-h-[90vh] flex items-center bg-[#111111] overflow-hidden select-none"
       aria-label="1st Look Garments Editorial Showcase"
     >
       {/* Background Slideshow Layer - 100% Brightness on Right, Full Garment Visibility */}
@@ -152,52 +152,52 @@ export const HeroSection: React.FC = () => {
 
         {/* 
           Localized Subtle Gradient:
-          - Only darkens the left side directly behind the white headline/copy (from-black/75 to via-black/30 at 45%).
-          - Transitions to 100% transparent on the right (60% to 100%), leaving models, garments, suits, and fabrics fully bright and clear!
+          - Only darkens the left side directly behind the white headline/copy (from-black/80 to via-black/40).
+          - Transitions to transparent on the right, keeping outfits and models bright!
         */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 via-45% to-transparent z-20 pointer-events-none"></div>
-        {/* Very subtle bottom vignette only for control contrast */}
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/60 to-transparent z-20 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 via-50% to-transparent z-20 pointer-events-none"></div>
+        {/* Subtle bottom vignette for control contrast */}
+        <div className="absolute inset-x-0 bottom-0 h-24 sm:h-28 bg-gradient-to-t from-black/70 to-transparent z-20 pointer-events-none"></div>
       </div>
 
       {/* Hero Stable Content with High Contrast Text Shadows */}
-      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-20 w-full">
         <div className="max-w-2xl">
           
           {/* Subtle Tagline / Location Pill */}
-          <div className="hero-animate-1 inline-flex items-center space-x-2.5 bg-black/50 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full text-white text-[11px] uppercase tracking-widest mb-6 shadow-md">
-            <span className="w-2 h-2 rounded-full bg-brand animate-ping"></span>
+          <div className="hero-animate-1 inline-flex items-center space-x-2 bg-black/60 backdrop-blur-md border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-white text-[10px] sm:text-[11px] uppercase tracking-wider sm:tracking-widest mb-3 sm:mb-6 shadow-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand animate-ping"></span>
             <span className="font-semibold text-ivory">Ghanta Ghar, Ghaziabad</span>
             <span className="text-white/40">|</span>
             <span className="text-neutral-200">Retail & Wholesale</span>
           </div>
 
-          {/* Main Editorial Headline with Text Shadow for Perfect Readability */}
-          <h1 className="hero-animate-2 font-editorial text-4xl sm:text-6xl lg:text-7xl font-normal text-white leading-[1.08] tracking-tight mb-6 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
+          {/* Main Editorial Headline with Clamp / Responsive Typography */}
+          <h1 className="hero-animate-2 font-editorial text-3xl sm:text-5xl lg:text-7xl font-normal text-white leading-[1.08] tracking-tight mb-3 sm:mb-6 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
             STYLE THAT <br />
             <span className="italic font-light text-ivory-100">SPEAKS.</span>
           </h1>
 
-          {/* Supporting Copy */}
-          <p className="hero-animate-3 text-base sm:text-lg text-neutral-200 font-light leading-relaxed mb-8 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.8)]">
+          {/* Supporting Copy - Compact on mobile */}
+          <p className="hero-animate-3 text-xs sm:text-base lg:text-lg text-neutral-200 font-light leading-relaxed mb-4 sm:mb-8 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.8)]">
             Discover everyday essentials, timeless tailored blazers, crisp formal shirts, and contemporary ethnic wear at <span className="text-white font-medium">1st Look Garments</span>. Premium fabrics and precision tailoring in the heart of Ghaziabad.
           </p>
 
           {/* Slogan Pill Accent with Dark Backdrop for Readability */}
-          <div className="hero-animate-4 mb-10 pl-4 border-l-2 border-brand bg-black/30 backdrop-blur-xs py-2 pr-4 rounded-r-xs max-w-lg">
-            <p className="text-xs uppercase tracking-widest text-brand font-semibold mb-0.5">
+          <div className="hero-animate-4 mb-5 sm:mb-8 pl-3 sm:pl-4 border-l-2 border-brand bg-black/40 backdrop-blur-xs py-1.5 sm:py-2 pr-3 sm:pr-4 rounded-r-xs max-w-lg">
+            <p className="text-[10px] sm:text-xs uppercase tracking-widest text-brand font-semibold mb-0.5">
               Official Store Motto
             </p>
-            <p className="font-editorial italic text-lg sm:text-xl text-ivory drop-shadow-md">
+            <p className="font-editorial italic text-sm sm:text-lg md:text-xl text-ivory drop-shadow-md">
               “{BUSINESS_CONFIG.officialSlogan}”
             </p>
           </div>
 
           {/* CTAs with Refined Hover Interactions */}
-          <div className="hero-animate-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <div className="hero-animate-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 mb-12 sm:mb-0">
             <Link
               to="/shop"
-              className="inline-flex items-center justify-center space-x-3 bg-brand hover:bg-brand-dark text-white px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded-xs shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 group"
+              className="inline-flex items-center justify-center space-x-2.5 bg-brand hover:bg-brand-dark text-white px-6 py-3 sm:px-8 sm:py-4 text-xs font-semibold uppercase tracking-widest rounded-xs shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 group"
             >
               <span>Explore The Collection</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -205,9 +205,9 @@ export const HeroSection: React.FC = () => {
 
             <Link
               to="/visit-store"
-              className="inline-flex items-center justify-center space-x-2.5 bg-black/40 hover:bg-white hover:text-dark text-white border border-white/40 hover:border-white px-7 py-4 text-xs font-semibold uppercase tracking-widest rounded-xs backdrop-blur-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+              className="inline-flex items-center justify-center space-x-2 bg-black/40 hover:bg-white hover:text-dark text-white border border-white/40 hover:border-white px-5 py-3 sm:px-7 sm:py-4 text-xs font-semibold uppercase tracking-widest rounded-xs backdrop-blur-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
             >
-              <MapPin className="w-4 h-4 text-brand" />
+              <MapPin className="w-3.5 h-3.5 text-brand" />
               <span>Visit Our Store</span>
             </Link>
           </div>
@@ -216,12 +216,12 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* Slideshow Progress Bar, Category Pill & Navigation Controls */}
-      <div className="absolute bottom-6 left-4 sm:left-8 md:left-12 z-30 flex items-center space-x-4 bg-black/75 backdrop-blur-md border border-white/20 px-4 py-2.5 rounded-full text-white text-xs shadow-2xl">
+      <div className="absolute bottom-3 sm:bottom-6 left-3 sm:left-8 md:left-12 z-30 flex items-center space-x-2 sm:space-x-4 bg-black/75 backdrop-blur-md border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-full text-white text-[10px] sm:text-xs shadow-2xl max-w-[calc(100%-24px)] sm:max-w-none">
         
         {/* Current Category Label Badge */}
-        <div className="flex items-center space-x-2 pr-3 border-r border-neutral-700">
+        <div className="flex items-center space-x-1.5 sm:space-x-2 pr-2 sm:pr-3 border-r border-neutral-700">
           <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
-          <span className="text-[11px] uppercase tracking-wider font-semibold text-ivory truncate max-w-[150px] sm:max-w-[200px]">
+          <span className="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-ivory truncate max-w-[110px] sm:max-w-[200px]">
             {HERO_SLIDES[currentIndex].category}
           </span>
         </div>
