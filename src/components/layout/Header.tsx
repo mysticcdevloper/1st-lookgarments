@@ -6,9 +6,9 @@ import {
   Search, 
   ChevronDown, 
   Phone, 
-  MapPin, 
   ArrowUpRight,
-  MessageCircle
+  MessageCircle,
+  MapPin
 } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../../config/business';
 import { buildWhatsAppUrl } from '../../utils/whatsapp';
@@ -21,7 +21,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
-  const [mobileSearchQuery, setMobileSearchQuery] = useState('');
   const location = useLocation();
 
   useEffect(() => {
@@ -59,20 +58,20 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
       className={`sticky top-0 z-40 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/98 backdrop-blur-md shadow-sm border-b border-neutral-100 py-2 sm:py-2.5' 
-          : 'bg-white border-b border-borderSoft py-2.5 sm:py-3.5'
+          : 'bg-white border-b border-borderSoft py-2.5 sm:py-3'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between min-h-[56px] sm:min-h-[64px]">
+        <div className="flex items-center justify-between min-h-[52px] sm:min-h-[60px] gap-2 lg:gap-4 xl:gap-8">
           
-          {/* Left Brand Identity: Official Logo + "1ST LOOK GARMENTS" in Elegant Typography */}
+          {/* Left Brand Identity: Official Logo + "1ST LOOK GARMENTS" */}
           <Link 
             to="/" 
-            className="flex items-center group transition-transform hover:opacity-95 shrink-0"
+            className="flex items-center group transition-transform hover:opacity-95 shrink-0 mr-2 xl:mr-4"
             aria-label="1st Look Garments Homepage"
           >
             {/* Official Circular Logo */}
-            <div className="relative w-9 h-9 sm:w-11 sm:h-11 md:w-13 md:h-13 rounded-full overflow-hidden border border-neutral-200/90 shadow-2xs shrink-0 bg-white flex items-center justify-center">
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-neutral-200/90 shadow-2xs shrink-0 bg-white flex items-center justify-center">
               <img
                 src="/assets/logo.png"
                 alt="1st Look Garments Official Logo"
@@ -82,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
 
             {/* Shop Name in Elegant Editorial Typography */}
             <div className="ml-2.5 sm:ml-3 flex flex-col justify-center">
-              <span className="font-editorial text-sm sm:text-base md:text-xl font-bold tracking-tight text-dark leading-none group-hover:text-brand transition-colors whitespace-nowrap">
+              <span className="font-editorial text-sm sm:text-base md:text-lg xl:text-xl font-bold tracking-tight text-dark leading-none group-hover:text-brand transition-colors whitespace-nowrap">
                 1ST LOOK GARMENTS
               </span>
               <span className="text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.16em] uppercase text-neutral-400 font-medium leading-tight mt-0.5 whitespace-nowrap">
@@ -92,12 +91,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
           </Link>
 
           {/* Desktop Navigation (lg+) */}
-          <nav className="hidden lg:flex items-center space-x-7" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center space-x-3.5 xl:space-x-5 2xl:space-x-7 shrink-0" aria-label="Main Navigation">
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
+                `nav-link-hover text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest font-semibold transition-colors hover:text-brand pb-1 whitespace-nowrap ${
+                  isActive ? 'text-brand after:w-full' : 'text-neutral-700'
                 }`
               }
             >
@@ -107,8 +106,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <NavLink
               to="/shop"
               className={({ isActive }) =>
-                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
+                `nav-link-hover text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest font-semibold transition-colors hover:text-brand pb-1 whitespace-nowrap ${
+                  isActive ? 'text-brand after:w-full' : 'text-neutral-700'
                 }`
               }
             >
@@ -118,15 +117,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <NavLink
               to="/new-arrivals"
               className={({ isActive }) =>
-                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
+                `nav-link-hover text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest font-semibold transition-colors hover:text-brand pb-1 whitespace-nowrap ${
+                  isActive ? 'text-brand after:w-full' : 'text-neutral-700'
                 }`
               }
             >
               New Arrivals
             </NavLink>
 
-            {/* Dropdown for Categories with Smooth Animated Transition */}
+            {/* Dropdown for Categories */}
             <div 
               className="relative"
               onMouseEnter={() => setCategoryDropdownOpen(true)}
@@ -135,7 +134,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               <button
                 type="button"
                 onClick={() => setCategoryDropdownOpen(!categoryDropdownOpen)}
-                className="nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 text-neutral-800 flex items-center space-x-1"
+                className="nav-link-hover text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest font-semibold transition-colors hover:text-brand pb-1 text-neutral-700 flex items-center space-x-1 whitespace-nowrap"
                 aria-expanded={categoryDropdownOpen}
               >
                 <span>Collections</span>
@@ -144,7 +143,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
 
               {/* Dropdown Menu */}
               {categoryDropdownOpen && (
-                <div className="absolute top-full -left-4 w-72 bg-white border border-borderSoft shadow-editorial py-2.5 rounded-sm z-50 transition-all duration-200 transform origin-top animate-fadeIn">
+                <div className="absolute top-full -left-4 w-72 bg-white border border-borderSoft shadow-editorial py-2.5 rounded-xs z-50 transition-all duration-200 transform origin-top animate-fadeIn">
                   <div className="px-4 py-1.5 border-b border-neutral-100 text-[10px] uppercase tracking-widest text-neutral-400 font-semibold">
                     Garment Categories
                   </div>
@@ -152,7 +151,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
                     <Link
                       key={cat.id}
                       to={cat.path}
-                      className="block px-4 py-2.5 text-xs text-neutral-700 hover:text-brand hover:bg-neutral-50 transition-colors group"
+                      className="block px-4 py-2 text-xs text-neutral-700 hover:text-brand hover:bg-neutral-50 transition-colors group"
                     >
                       <div className="font-medium group-hover:translate-x-1 transition-transform duration-200">{cat.name}</div>
                       <div className="text-[10px] text-neutral-400 font-normal truncate">{cat.description}</div>
@@ -174,8 +173,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <NavLink
               to="/wholesale"
               className={({ isActive }) =>
-                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
+                `nav-link-hover text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest font-semibold transition-colors hover:text-brand pb-1 whitespace-nowrap ${
+                  isActive ? 'text-brand after:w-full' : 'text-neutral-700'
                 }`
               }
             >
@@ -185,8 +184,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <NavLink
               to="/visit-store"
               className={({ isActive }) =>
-                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
+                `nav-link-hover text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest font-semibold transition-colors hover:text-brand pb-1 whitespace-nowrap ${
+                  isActive ? 'text-brand after:w-full' : 'text-neutral-700'
                 }`
               }
             >
@@ -196,8 +195,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
+                `nav-link-hover text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest font-semibold transition-colors hover:text-brand pb-1 whitespace-nowrap ${
+                  isActive ? 'text-brand after:w-full' : 'text-neutral-700'
                 }`
               }
             >
@@ -206,39 +205,44 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
           </nav>
 
           {/* Desktop Right Action Icons (lg+) */}
-          <div className="hidden lg:flex items-center space-x-3 sm:space-x-4">
+          <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 shrink-0">
+            {/* Search Icon */}
             <button
               type="button"
               onClick={onOpenSearch}
-              className="p-2 text-neutral-700 hover:text-brand transition-colors rounded-full hover:bg-neutral-100 focus:outline-none focus:ring-1 focus:ring-brand"
+              className="p-2 text-neutral-700 hover:text-brand transition-colors rounded-full hover:bg-neutral-100 focus:outline-none focus:ring-1 focus:ring-brand shrink-0"
               aria-label="Search garments"
               title="Search catalog"
             >
-              <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+              <Search className="w-4 h-4 xl:w-4.5 xl:h-4.5" />
             </button>
 
+            {/* Direct Call Link with single-line phone number */}
             <a
               href={`tel:${BUSINESS_CONFIG.contact.phoneTel}`}
-              className="inline-flex items-center space-x-1.5 text-xs text-neutral-700 hover:text-brand font-medium transition-colors p-2"
+              className="inline-flex items-center space-x-1.5 text-xs text-neutral-700 hover:text-brand font-medium transition-colors p-1.5 xl:p-2 shrink-0 whitespace-nowrap"
               title="Call 1st Look Garments"
             >
-              <Phone className="w-4 h-4 text-brand" />
-              <span className="hidden xl:inline">{BUSINESS_CONFIG.contact.phoneDisplay}</span>
+              <Phone className="w-3.5 h-3.5 text-brand shrink-0" />
+              <span className="hidden xl:inline whitespace-nowrap font-medium text-xs text-neutral-800">
+                {BUSINESS_CONFIG.contact.phoneDisplay}
+              </span>
             </a>
 
+            {/* WhatsApp Header CTA Button */}
             <a
               href={whatsappGeneralUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-1.5 bg-brand hover:bg-brand-dark hover:shadow-md hover:scale-103 active:scale-97 text-white px-4 py-2 text-xs font-medium uppercase tracking-widest rounded-sm shadow-xs transition-all duration-300"
+              className="inline-flex items-center justify-center space-x-1.5 bg-brand hover:bg-brand-dark text-white px-3.5 py-1.5 xl:px-4 xl:py-2 text-[11px] xl:text-xs font-semibold uppercase tracking-wider xl:tracking-widest rounded-xs shadow-xs hover:shadow-md transition-all duration-300 shrink-0 whitespace-nowrap"
             >
+              <MessageCircle className="w-3.5 h-3.5" />
               <span>WhatsApp</span>
             </a>
           </div>
 
-          {/* Mobile Right Controls: [Search] [Menu] (Clean, luxury, aligned) */}
+          {/* Mobile Right Controls: [Search] [Menu] */}
           <div className="flex items-center space-x-1 sm:space-x-1.5 lg:hidden shrink-0">
-            {/* Search Button on Mobile */}
             <button
               type="button"
               onClick={onOpenSearch}
@@ -249,7 +253,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               <Search className="w-5 h-5 text-neutral-700" />
             </button>
 
-            {/* Hamburger Menu Toggle Button at Far Right */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="w-10 h-10 flex items-center justify-center text-dark hover:text-brand focus:outline-none rounded-xs transition-colors"
@@ -277,7 +280,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
         >
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity duration-300"
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-300"
             onClick={() => setMobileMenuOpen(false)}
           />
 
@@ -304,129 +307,116 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
 
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center text-dark hover:text-brand transition-colors"
-                  aria-label="Close navigation menu"
+                  className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-500 hover:text-dark hover:bg-neutral-200 transition-colors"
+                  aria-label="Close menu"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 
-              {/* Quick Search inside Drawer */}
-              <div className="mb-5">
-                <form 
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    if (onOpenSearch) onOpenSearch();
-                    setMobileMenuOpen(false);
-                  }}
-                  className="relative"
-                >
-                  <input
-                    type="text"
-                    placeholder="Search shirts, blazers, trousers..."
-                    value={mobileSearchQuery}
-                    onChange={(e) => setMobileSearchQuery(e.target.value)}
-                    onClick={() => {
-                      if (onOpenSearch) onOpenSearch();
-                      setMobileMenuOpen(false);
-                    }}
-                    className="w-full pl-9 pr-3 py-2 bg-neutral-50 border border-neutral-200 rounded-xs text-xs text-dark placeholder:text-neutral-400 focus:outline-none focus:border-dark"
-                  />
-                  <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                </form>
-              </div>
-
-              {/* Navigation Links */}
-              <nav className="space-y-3.5" aria-label="Mobile Drawer Navigation">
-                <Link
+              {/* Mobile Navigation Links */}
+              <nav className="space-y-1 mb-6" aria-label="Mobile Navigation Links">
+                <NavLink
                   to="/"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
+                  className={({ isActive }) =>
+                    `flex items-center justify-between px-3 py-2.5 rounded-xs text-xs uppercase tracking-wider font-semibold transition-colors ${
+                      isActive ? 'bg-neutral-100 text-brand' : 'text-neutral-800 hover:bg-neutral-50'
+                    }`
+                  }
                 >
-                  Home
-                </Link>
-                <Link
-                  to="/shop"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
-                >
-                  Shop All Collections
-                </Link>
-                <Link
-                  to="/new-arrivals"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
-                >
-                  New Arrivals
-                </Link>
+                  <span>Home</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
+                </NavLink>
 
-                {/* Categories Sub-tree */}
-                <div className="py-2 pl-3 border-l-2 border-brand/50 space-y-2">
-                  <div className="text-[10px] uppercase tracking-wider text-neutral-400 font-bold">
-                    Collections & Categories
+                <NavLink
+                  to="/shop"
+                  className={({ isActive }) =>
+                    `flex items-center justify-between px-3 py-2.5 rounded-xs text-xs uppercase tracking-wider font-semibold transition-colors ${
+                      isActive ? 'bg-neutral-100 text-brand' : 'text-neutral-800 hover:bg-neutral-50'
+                    }`
+                  }
+                >
+                  <span>Shop All Garments</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
+                </NavLink>
+
+                <NavLink
+                  to="/new-arrivals"
+                  className={({ isActive }) =>
+                    `flex items-center justify-between px-3 py-2.5 rounded-xs text-xs uppercase tracking-wider font-semibold transition-colors ${
+                      isActive ? 'bg-neutral-100 text-brand' : 'text-neutral-800 hover:bg-neutral-50'
+                    }`
+                  }
+                >
+                  <span>New Arrivals</span>
+                  <span className="text-[9px] font-bold text-brand bg-brand/10 px-1.5 py-0.5 rounded-xs">NEW</span>
+                </NavLink>
+
+                {/* Categories Submenu in Mobile */}
+                <div className="pt-2 pb-1">
+                  <div className="px-3 py-1 text-[10px] uppercase tracking-widest text-neutral-400 font-bold">
+                    Collections
                   </div>
-                  {BUSINESS_CONFIG.categories.map((c) => (
-                    <Link
-                      key={c.id}
-                      to={c.path}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-xs font-medium text-neutral-700 hover:text-brand"
-                    >
-                      {c.name}
-                    </Link>
-                  ))}
+                  <div className="space-y-0.5 pl-2">
+                    {BUSINESS_CONFIG.categories.map((cat) => (
+                      <Link
+                        key={cat.id}
+                        to={cat.path}
+                        className="flex items-center justify-between px-3 py-2 text-xs text-neutral-600 hover:text-brand hover:bg-neutral-50 rounded-xs transition-colors"
+                      >
+                        <span>{cat.name}</span>
+                        <span className="text-[10px] text-neutral-400">View</span>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
 
-                <Link
+                <NavLink
                   to="/wholesale"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
+                  className={({ isActive }) =>
+                    `flex items-center justify-between px-3 py-2.5 rounded-xs text-xs uppercase tracking-wider font-semibold transition-colors ${
+                      isActive ? 'bg-neutral-100 text-brand' : 'text-neutral-800 hover:bg-neutral-50'
+                    }`
+                  }
                 >
-                  Wholesale & Bulk
-                </Link>
-                <Link
+                  <span>Wholesale Enquiries</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
+                </NavLink>
+
+                <NavLink
                   to="/visit-store"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
+                  className={({ isActive }) =>
+                    `flex items-center justify-between px-3 py-2.5 rounded-xs text-xs uppercase tracking-wider font-semibold transition-colors ${
+                      isActive ? 'bg-neutral-100 text-brand' : 'text-neutral-800 hover:bg-neutral-50'
+                    }`
+                  }
                 >
-                  Visit Ghanta Ghar Store
-                </Link>
-                <Link
+                  <span>Visit Store</span>
+                  <MapPin className="w-3.5 h-3.5 text-brand" />
+                </NavLink>
+
+                <NavLink
                   to="/about"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
+                  className={({ isActive }) =>
+                    `flex items-center justify-between px-3 py-2.5 rounded-xs text-xs uppercase tracking-wider font-semibold transition-colors ${
+                      isActive ? 'bg-neutral-100 text-brand' : 'text-neutral-800 hover:bg-neutral-50'
+                    }`
+                  }
                 >
-                  About The Brand
-                </Link>
-                <Link
-                  to="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
-                >
-                  Contact & Directions
-                </Link>
-                <Link
-                  to="/faq"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-sm uppercase tracking-widest font-semibold text-dark hover:text-brand transition-colors"
-                >
-                  FAQ & Inquiries
-                </Link>
+                  <span>About Our Store</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
+                </NavLink>
               </nav>
+
             </div>
 
-            {/* Bottom Contact Info in Drawer */}
-            <div className="pt-5 mt-5 border-t border-neutral-100 space-y-2.5">
-              <div className="text-[11px] text-neutral-500 mb-2 flex items-center">
-                <MapPin className="w-3.5 h-3.5 mr-1 text-brand shrink-0" />
-                <span>Ramanuj Dayal Market, Ghanta Ghar</span>
-              </div>
-              
+            {/* Drawer Bottom Actions: Phone & WhatsApp */}
+            <div className="pt-4 border-t border-neutral-100 space-y-2.5">
               <a
                 href={whatsappGeneralUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xs text-xs uppercase tracking-widest font-semibold shadow-xs transition-colors"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 px-4 rounded-xs text-xs font-semibold uppercase tracking-wider flex items-center justify-center space-x-2 transition-colors shadow-xs"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Chat on WhatsApp</span>
@@ -434,11 +424,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
 
               <a
                 href={`tel:${BUSINESS_CONFIG.contact.phoneTel}`}
-                className="w-full flex items-center justify-center space-x-2 border border-neutral-300 py-2.5 rounded-xs text-xs uppercase tracking-widest font-medium text-neutral-800 hover:bg-neutral-50 transition-colors"
+                className="w-full border border-neutral-300 hover:border-dark text-dark py-2.5 px-4 rounded-xs text-xs font-semibold uppercase tracking-wider flex items-center justify-center space-x-2 transition-colors"
               >
-                <Phone className="w-3.5 h-3.5 text-brand" />
-                <span>Call {BUSINESS_CONFIG.contact.phoneDisplay}</span>
+                <Phone className="w-4 h-4 text-brand" />
+                <span>Call: {BUSINESS_CONFIG.contact.phoneDisplay}</span>
               </a>
+
+              <p className="text-[10px] text-neutral-400 text-center pt-1">
+                87/2 Ramanuj Dayal Market, Ghanta Ghar, Ghaziabad
+              </p>
             </div>
 
           </div>
