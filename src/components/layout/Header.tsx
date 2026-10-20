@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile drawer on route change
+  // Close mobile drawer and dropdown on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setCategoryDropdownOpen(false);
@@ -73,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               <img
                 src="/assets/logo.png"
                 alt="1st Look Garments Official Circular Logo"
-                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain rounded-full border border-neutral-200/80 shadow-xs"
+                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain rounded-full border border-neutral-200/80 shadow-xs group-hover:scale-102 transition-transform duration-300"
               />
               <div className="ml-3 hidden sm:block">
                 <span className="block font-editorial text-lg md:text-xl font-bold tracking-tight text-dark group-hover:text-brand transition-colors">
@@ -86,13 +86,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation with Smooth Hover Underline Animation */}
           <nav className="hidden lg:flex items-center space-x-7" aria-label="Main Navigation">
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold border-b border-brand' : 'text-neutral-800'
+                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
+                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
                 }`
               }
             >
@@ -102,8 +102,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <NavLink
               to="/shop"
               className={({ isActive }) =>
-                `text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold border-b border-brand' : 'text-neutral-800'
+                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
+                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
                 }`
               }
             >
@@ -113,15 +113,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <NavLink
               to="/new-arrivals"
               className={({ isActive }) =>
-                `text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold border-b border-brand' : 'text-neutral-800'
+                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
+                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
                 }`
               }
             >
               New Arrivals
             </NavLink>
 
-            {/* Dropdown for Categories */}
+            {/* Dropdown for Categories with Smooth Animated Transition */}
             <div 
               className="relative"
               onMouseEnter={() => setCategoryDropdownOpen(true)}
@@ -130,16 +130,16 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               <button
                 type="button"
                 onClick={() => setCategoryDropdownOpen(!categoryDropdownOpen)}
-                className="text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 text-neutral-800 flex items-center space-x-1"
+                className="nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 text-neutral-800 flex items-center space-x-1"
                 aria-expanded={categoryDropdownOpen}
               >
                 <span>Collections</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${categoryDropdownOpen ? 'rotate-180 text-brand' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${categoryDropdownOpen ? 'rotate-180 text-brand' : ''}`} />
               </button>
 
               {/* Dropdown Menu */}
               {categoryDropdownOpen && (
-                <div className="absolute top-full -left-4 w-72 bg-white border border-borderSoft shadow-editorial py-2.5 rounded-sm z-50 animate-fadeIn">
+                <div className="absolute top-full -left-4 w-72 bg-white border border-borderSoft shadow-editorial py-2.5 rounded-sm z-50 transition-all duration-200 transform origin-top animate-fadeIn">
                   <div className="px-4 py-1.5 border-b border-neutral-100 text-[10px] uppercase tracking-widest text-neutral-400 font-semibold">
                     Garment Categories
                   </div>
@@ -147,9 +147,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
                     <Link
                       key={cat.id}
                       to={cat.path}
-                      className="block px-4 py-2.5 text-xs text-neutral-700 hover:text-brand hover:bg-neutral-50 transition-colors"
+                      className="block px-4 py-2.5 text-xs text-neutral-700 hover:text-brand hover:bg-neutral-50 transition-colors group"
                     >
-                      <div className="font-medium">{cat.name}</div>
+                      <div className="font-medium group-hover:translate-x-1 transition-transform duration-200">{cat.name}</div>
                       <div className="text-[10px] text-neutral-400 font-normal truncate">{cat.description}</div>
                     </Link>
                   ))}
@@ -169,8 +169,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <NavLink
               to="/wholesale"
               className={({ isActive }) =>
-                `text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold border-b border-brand' : 'text-neutral-800'
+                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
+                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
                 }`
               }
             >
@@ -180,8 +180,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <NavLink
               to="/visit-store"
               className={({ isActive }) =>
-                `text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold border-b border-brand' : 'text-neutral-800'
+                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
+                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
                 }`
               }
             >
@@ -191,8 +191,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                `text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
-                  isActive ? 'text-brand font-semibold border-b border-brand' : 'text-neutral-800'
+                `nav-link-hover text-xs uppercase tracking-widest font-medium transition-colors hover:text-brand pb-1 ${
+                  isActive ? 'text-brand font-semibold after:w-full' : 'text-neutral-800'
                 }`
               }
             >
@@ -202,25 +202,19 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
 
           {/* Right Action Icons & Direct WhatsApp Action */}
           <div className="flex items-center space-x-3 sm:space-x-4">
-            {onOpenSearch && (
-              <button
-                type="button"
-                onClick={onOpenSearch}
-                className="p-2 text-neutral-700 hover:text-brand transition-colors rounded-full hover:bg-neutral-100"
-                aria-label="Search garments"
-              >
-                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
-              </button>
-            )}
-
-            <Link
-              to="/shop"
-              className="hidden md:inline-flex p-2 text-neutral-700 hover:text-brand transition-colors rounded-full hover:bg-neutral-100"
-              aria-label="Search and filter products"
+            
+            {/* Single Clean Search Button */}
+            <button
+              type="button"
+              onClick={onOpenSearch}
+              className="p-2 text-neutral-700 hover:text-brand transition-colors rounded-full hover:bg-neutral-100 focus:outline-none focus:ring-1 focus:ring-brand"
+              aria-label="Search garments"
+              title="Search catalog"
             >
               <Search className="w-4 h-4 sm:w-5 sm:h-5" />
-            </Link>
+            </button>
 
+            {/* Direct Phone Link */}
             <a
               href={`tel:${BUSINESS_CONFIG.contact.phoneTel}`}
               className="hidden sm:inline-flex items-center space-x-1.5 text-xs text-neutral-700 hover:text-brand font-medium transition-colors p-2"
@@ -230,11 +224,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               <span className="hidden xl:inline">{BUSINESS_CONFIG.contact.phoneDisplay}</span>
             </a>
 
+            {/* Direct WhatsApp CTA Button with Smooth Hover / Scale Animation */}
             <a
               href={whatsappGeneralUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-1.5 bg-brand hover:bg-brand-dark text-white px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-medium uppercase tracking-widest rounded-sm shadow-xs transition-colors"
+              className="inline-flex items-center space-x-1.5 bg-brand hover:bg-brand-dark hover:shadow-md hover:scale-103 active:scale-97 text-white px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-medium uppercase tracking-widest rounded-sm shadow-xs transition-all duration-300"
             >
               <span>WhatsApp</span>
             </a>
@@ -247,12 +242,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
         <div className="fixed inset-0 top-[60px] z-50 lg:hidden flex">
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity duration-300"
             onClick={() => setMobileMenuOpen(false)}
           />
 
           {/* Drawer Content */}
-          <div className="relative w-4/5 max-w-sm bg-white h-full shadow-2xl flex flex-col justify-between overflow-y-auto p-6 z-10 border-r border-neutral-200">
+          <div className="relative w-4/5 max-w-sm bg-white h-full shadow-2xl flex flex-col justify-between overflow-y-auto p-6 z-10 border-r border-neutral-200 animate-fadeIn">
             <div>
               {/* Header brand tag */}
               <div className="pb-4 mb-4 border-b border-neutral-100">
@@ -344,13 +339,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
                 href={whatsappGeneralUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center space-x-2 bg-brand text-white py-2.5 rounded-xs text-xs uppercase tracking-widest font-semibold shadow-xs mb-3"
+                className="w-full flex items-center justify-center space-x-2 bg-brand text-white py-2.5 rounded-xs text-xs uppercase tracking-widest font-semibold shadow-xs mb-3 hover:bg-brand-dark transition-colors"
               >
                 <span>WhatsApp Us</span>
               </a>
               <a
                 href={`tel:${BUSINESS_CONFIG.contact.phoneTel}`}
-                className="w-full flex items-center justify-center space-x-2 border border-neutral-300 py-2.5 rounded-xs text-xs uppercase tracking-widest font-medium text-neutral-800 hover:bg-neutral-50"
+                className="w-full flex items-center justify-center space-x-2 border border-neutral-300 py-2.5 rounded-xs text-xs uppercase tracking-widest font-medium text-neutral-800 hover:bg-neutral-50 transition-colors"
               >
                 <Phone className="w-3.5 h-3.5 text-brand" />
                 <span>Call +91 98915 17860</span>

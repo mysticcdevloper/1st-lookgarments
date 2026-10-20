@@ -106,7 +106,7 @@ export const PRODUCTS: Product[] = [
     originalPrice: 1799,
     images: [
       'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1200&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1620012253295-c15c429fccf8?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=1200&auto=format&fit=crop',
     ],
     sizes: ['38', '39', '40', '42', '44'],
     colors: [
@@ -164,7 +164,7 @@ export const PRODUCTS: Product[] = [
     description: 'Modern smart-casual shirt with fine geometric micro-motifs. Made with soft satin-finish cotton that catches just the right amount of light for evening dinners and gatherings.',
     price: 1299,
     images: [
-      'https://images.unsplash.com/photo-1620012253295-c15c429fccf8?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=1200&auto=format&fit=crop',
     ],
     sizes: ['38', '40', '42', '44'],
     colors: [
@@ -249,7 +249,7 @@ export const PRODUCTS: Product[] = [
     price: 1799,
     originalPrice: 2299,
     images: [
-      'https://images.unsplash.com/photo-1542272604-780c96856592?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1200&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1200&auto=format&fit=crop',
     ],
     sizes: ['30', '32', '34', '36', '38'],

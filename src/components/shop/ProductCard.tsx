@@ -12,7 +12,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const whatsappUrl = getProductEnquiryUrl(product);
 
   return (
-    <div className="group flex flex-col bg-white border border-borderSoft hover:border-dark/40 transition-all duration-300 rounded-xs overflow-hidden">
+    <div className="group flex flex-col bg-white border border-borderSoft hover:border-dark/30 hover:shadow-editorial hover:-translate-y-1 transition-all duration-300 rounded-xs overflow-hidden">
       
       {/* Product Image Container */}
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-ivory">

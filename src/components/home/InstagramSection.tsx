@@ -18,7 +18,7 @@ export const InstagramSection: React.FC = () => {
     },
     {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1542272604-780c96856592?q=80&w=800&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop',
       caption: 'Selvedge comfort stretch denim for everyday movement. #thefixedpriceshop',
       tag: 'Denim',
     },

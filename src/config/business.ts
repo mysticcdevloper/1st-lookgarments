@@ -53,7 +53,7 @@ export const BUSINESS_CONFIG = {
       slug: 'bottomwear',
       path: '/collections/bottomwear',
       description: 'Comfort-stretch denims, pleat-front formal trousers, and smart casual chinos.',
-      image: 'https://images.unsplash.com/photo-1542272604-780c96856592?q=80&w=1200&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1200&auto=format&fit=crop',
     },
     {
       id: 'tshirts',
