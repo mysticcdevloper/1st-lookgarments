@@ -62,17 +62,17 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
           : 'bg-white border-b border-borderSoft py-2.5 sm:py-3.5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between min-h-[52px] sm:min-h-[58px]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between min-h-[56px] sm:min-h-[64px]">
           
-          {/* Left Brand Identity: Logo + 2-Line Shop Name (Always together on all screen sizes) */}
+          {/* Left Brand Identity: Official Logo + "1ST LOOK GARMENTS" in Elegant Typography */}
           <Link 
             to="/" 
-            className="flex items-center group transition-transform hover:opacity-95 shrink-0 max-w-[65%] sm:max-w-none"
+            className="flex items-center group transition-transform hover:opacity-95 shrink-0"
             aria-label="1st Look Garments Homepage"
           >
             {/* Official Circular Logo */}
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden border border-neutral-200/90 shadow-2xs shrink-0 bg-white flex items-center justify-center">
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 md:w-13 md:h-13 rounded-full overflow-hidden border border-neutral-200/90 shadow-2xs shrink-0 bg-white flex items-center justify-center">
               <img
                 src="/assets/logo.png"
                 alt="1st Look Garments Official Logo"
@@ -80,16 +80,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               />
             </div>
 
-            {/* Shop Name: 2 Compact Lines as Requested */}
-            <div className="ml-2 sm:ml-3 flex flex-col justify-center min-w-0">
+            {/* Shop Name in Elegant Editorial Typography */}
+            <div className="ml-2.5 sm:ml-3 flex flex-col justify-center">
               <span className="font-editorial text-sm sm:text-base md:text-xl font-bold tracking-tight text-dark leading-none group-hover:text-brand transition-colors whitespace-nowrap">
-                1ST LOOK
+                1ST LOOK GARMENTS
               </span>
-              <span className="font-editorial text-xs sm:text-sm md:text-base font-semibold tracking-wider text-brand leading-none mt-0.5 sm:mt-1 whitespace-nowrap">
-                GARMENTS
-              </span>
-              {/* Optional Subtitle when width permits */}
-              <span className="hidden md:block text-[9px] md:text-[10px] tracking-[0.18em] uppercase text-neutral-400 font-medium leading-tight mt-0.5 truncate">
+              <span className="text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.16em] uppercase text-neutral-400 font-medium leading-tight mt-0.5 whitespace-nowrap">
                 Ghanta Ghar • Ghaziabad
               </span>
             </div>
@@ -240,8 +236,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             </a>
           </div>
 
-          {/* Mobile Right Controls: [Search (optional)] [Compact WhatsApp] [Menu] (lg:hidden) */}
-          <div className="flex items-center space-x-1 sm:space-x-2 lg:hidden shrink-0">
+          {/* Mobile Right Controls: [Search] [Menu] (Clean, luxury, aligned) */}
+          <div className="flex items-center space-x-1 sm:space-x-1.5 lg:hidden shrink-0">
             {/* Search Button on Mobile */}
             <button
               type="button"
@@ -250,25 +246,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               aria-label="Search garments"
               title="Search catalog"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-5 h-5 text-neutral-700" />
             </button>
-
-            {/* Compact WhatsApp Button: Proportional, Not Oversized */}
-            <a
-              href={whatsappGeneralUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center space-x-1 bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1.5 rounded-xs text-[10px] font-semibold uppercase tracking-wider transition-colors min-h-[36px] active:scale-95 shadow-2xs"
-              aria-label="Chat with 1st Look Garments on WhatsApp"
-            >
-              <MessageCircle className="w-3.5 h-3.5" />
-              <span className="hidden xs:inline">WhatsApp</span>
-            </a>
 
             {/* Hamburger Menu Toggle Button at Far Right */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-11 h-11 flex items-center justify-center text-dark hover:text-brand focus:outline-none rounded-xs transition-colors"
+              className="w-10 h-10 flex items-center justify-center text-dark hover:text-brand focus:outline-none rounded-xs transition-colors"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >

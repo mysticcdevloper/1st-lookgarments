@@ -3,11 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
   MapPin, 
-  Sparkles, 
-  ChevronLeft, 
-  ChevronRight, 
-  Pause, 
-  Play 
+  Sparkles 
 } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../../config/business';
 
@@ -18,7 +14,7 @@ interface HeroSlide {
   alt: string;
 }
 
-// 7 Verified, Bright, High-Clarity Fashion Photographs
+// Curated high-clarity fashion photography showcasing menswear outfits
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'blazers',
@@ -34,9 +30,9 @@ const HERO_SLIDES: HeroSlide[] = [
   },
   {
     id: 'smart-casuals',
-    category: 'Washed Linen & Casuals',
-    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=85&w=2000&auto=format&fit=crop',
-    alt: 'European Washed Linen Shirt and Smart Casual Layers',
+    category: 'Smart Casual Ensembles',
+    image: 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?q=85&w=2000&auto=format&fit=crop',
+    alt: 'Refined Smart Casual Menswear Layers and Linen Shirt',
   },
   {
     id: 'trousers',
@@ -51,24 +47,24 @@ const HERO_SLIDES: HeroSlide[] = [
     alt: 'Raw Silk Embroidered Festive Kurta for Weddings and Celebrations',
   },
   {
-    id: 'tuxedos',
-    category: 'Evening Occasion Tuxedos',
-    image: 'https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?q=85&w=2000&auto=format&fit=crop',
-    alt: 'Satin-Shawl Black-Tie Evening Tuxedo Dinner Jacket',
+    id: 'evening-suits',
+    category: 'Evening Occasion Tailoring',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=85&w=2000&auto=format&fit=crop',
+    alt: 'Tailored Evening Suit and Formal Menswear',
   },
   {
-    id: 'denim-casuals',
-    category: 'Piqué Polos & Modern Denim',
-    image: 'https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?q=85&w=2000&auto=format&fit=crop',
-    alt: 'Double-Mercerized Cotton Polo Shirt and Selvedge Denim',
+    id: 'tuxedos',
+    category: 'Occasion Wear & Formals',
+    image: 'https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?q=85&w=2000&auto=format&fit=crop',
+    alt: 'Satin-Shawl Black-Tie Evening Dinner Jacket',
   },
 ];
 
-const SLIDE_INTERVAL_MS = 2000; // 2 seconds per requirement
+// Carousel transitions every 4.5 seconds per requirement
+const SLIDE_INTERVAL_MS = 4500;
 
 export const HeroSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   const timerRef = useRef<number | null>(null);
 
@@ -77,9 +73,6 @@ export const HeroSection: React.FC = () => {
     if (typeof window !== 'undefined') {
       const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       setIsReducedMotion(mediaQuery.matches);
-      if (mediaQuery.matches) {
-        setIsPlaying(false);
-      }
     }
   }, []);
 
@@ -95,17 +88,9 @@ export const HeroSection: React.FC = () => {
     setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
   }, []);
 
-  const goToPrev = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-  }, []);
-
-  // Automatic 2-second slideshow timer
+  // Automatic 4.5-second slideshow timer
   useEffect(() => {
-    if (!isPlaying || isReducedMotion) {
-      if (timerRef.current) {
-        window.clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
+    if (isReducedMotion) {
       return;
     }
 
@@ -118,32 +103,31 @@ export const HeroSection: React.FC = () => {
         window.clearInterval(timerRef.current);
       }
     };
-  }, [isPlaying, isReducedMotion, goToNext]);
+  }, [isReducedMotion, goToNext]);
 
   return (
     <section 
-      className="relative min-h-[72vh] sm:min-h-[82vh] lg:min-h-[90vh] flex items-center bg-[#111111] overflow-hidden select-none"
+      className="relative min-h-[68vh] sm:min-h-[78vh] lg:min-h-[88vh] flex items-center bg-[#111111] overflow-hidden select-none"
       aria-label="1st Look Garments Editorial Showcase"
     >
-      {/* Background Slideshow Layer - 100% Brightness on Right, Full Garment Visibility */}
+      {/* Background Slideshow Layer - Crisp, Bright, High-End Menswear Photography */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         {HERO_SLIDES.map((slide, index) => {
           const isActive = index === currentIndex;
           return (
             <div
               key={slide.id}
-              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
                 isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
               }`}
               aria-hidden={!isActive}
             >
-              {/* Full-opacity image: NO dark filter, preserving 100% of fabric details and vibrant outfit colors */}
               <img
                 src={slide.image}
                 alt={slide.alt}
                 loading={index === 0 ? 'eager' : 'lazy'}
-                className={`w-full h-full object-cover object-[center_20%] md:object-[center_25%] transition-transform duration-[2500ms] ease-out ${
-                  isActive && !isReducedMotion ? 'scale-105' : 'scale-100'
+                className={`w-full h-full object-cover object-[center_20%] md:object-[center_25%] transition-transform duration-[4500ms] ease-out ${
+                  isActive && !isReducedMotion ? 'scale-103' : 'scale-100'
                 } opacity-100`}
               />
             </div>
@@ -151,61 +135,54 @@ export const HeroSection: React.FC = () => {
         })}
 
         {/* 
-          Localized Subtle Gradient:
-          - Only darkens the left side directly behind the white headline/copy (from-black/80 to via-black/40).
-          - Transitions to transparent on the right, keeping outfits and models bright!
+          Subtle Gradient:
+          Gentle left-side gradient only behind text for crisp contrast, leaving clothing and model 100% natural and bright
         */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 via-50% to-transparent z-20 pointer-events-none"></div>
-        {/* Subtle bottom vignette for control contrast */}
-        <div className="absolute inset-x-0 bottom-0 h-24 sm:h-28 bg-gradient-to-t from-black/70 to-transparent z-20 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 via-50% to-transparent z-20 pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent z-20 pointer-events-none" />
       </div>
 
-      {/* Hero Stable Content with High Contrast Text Shadows */}
-      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-20 w-full">
-        <div className="max-w-2xl">
+      {/* Hero Content - Clean Editorial Layout with Clear Hierarchy */}
+      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20 w-full">
+        <div className="max-w-xl">
           
-          {/* Subtle Tagline / Location Pill */}
-          <div className="hero-animate-1 inline-flex items-center space-x-2 bg-black/60 backdrop-blur-md border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-white text-[10px] sm:text-[11px] uppercase tracking-wider sm:tracking-widest mb-3 sm:mb-6 shadow-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand animate-ping"></span>
-            <span className="font-semibold text-ivory">Ghanta Ghar, Ghaziabad</span>
-            <span className="text-white/40">|</span>
-            <span className="text-neutral-200">Retail & Wholesale</span>
+          {/* Understated Location & Brand Label */}
+          <div className="hero-animate-1 inline-flex items-center space-x-1.5 text-white/80 text-[10px] sm:text-xs uppercase tracking-widest font-medium mb-3 sm:mb-4">
+            <MapPin className="w-3 h-3 text-brand" />
+            <span>Ghanta Ghar, Ghaziabad • The Fixed Price Shop</span>
           </div>
 
-          {/* Main Editorial Headline with Clamp / Responsive Typography */}
-          <h1 className="hero-animate-2 font-editorial text-3xl sm:text-5xl lg:text-7xl font-normal text-white leading-[1.08] tracking-tight mb-3 sm:mb-6 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
+          {/* Headline in Elegant Editorial Serif Typography */}
+          <h1 className="hero-animate-2 font-editorial text-3xl sm:text-5xl lg:text-7xl font-normal text-white leading-[1.08] tracking-tight mb-3 sm:mb-4 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
             STYLE THAT <br />
             <span className="italic font-light text-ivory-100">SPEAKS.</span>
           </h1>
 
-          {/* Supporting Copy - Compact on mobile */}
-          <p className="hero-animate-3 text-xs sm:text-base lg:text-lg text-neutral-200 font-light leading-relaxed mb-4 sm:mb-8 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.8)]">
-            Discover everyday essentials, timeless tailored blazers, crisp formal shirts, and contemporary ethnic wear at <span className="text-white font-medium">1st Look Garments</span>. Premium fabrics and precision tailoring in the heart of Ghaziabad.
+          {/* Concise, Refined Description */}
+          <p className="hero-animate-3 text-xs sm:text-base text-neutral-200 font-light leading-relaxed mb-4 sm:mb-6 max-w-lg drop-shadow-[0_1px_6px_rgba(0,0,0,0.8)]">
+            Discover refined menswear, premium fabrics and timeless style at 1st Look Garments.
           </p>
 
-          {/* Slogan Pill Accent with Dark Backdrop for Readability */}
-          <div className="hero-animate-4 mb-5 sm:mb-8 pl-3 sm:pl-4 border-l-2 border-brand bg-black/40 backdrop-blur-xs py-1.5 sm:py-2 pr-3 sm:pr-4 rounded-r-xs max-w-lg">
-            <p className="text-[10px] sm:text-xs uppercase tracking-widest text-brand font-semibold mb-0.5">
-              Official Store Motto
-            </p>
-            <p className="font-editorial italic text-sm sm:text-lg md:text-xl text-ivory drop-shadow-md">
+          {/* Compact, Elegant Official Slogan Display (No bulky dark box) */}
+          <div className="hero-animate-4 mb-6 sm:mb-8">
+            <p className="font-editorial italic text-sm sm:text-base md:text-lg text-ivory drop-shadow-md">
               “{BUSINESS_CONFIG.officialSlogan}”
             </p>
           </div>
 
-          {/* CTAs with Refined Hover Interactions */}
-          <div className="hero-animate-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 mb-12 sm:mb-0">
+          {/* Elegant Action Buttons with Consistent Heights and Refined Style */}
+          <div className="hero-animate-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 max-w-md sm:max-w-none">
             <Link
               to="/shop"
-              className="inline-flex items-center justify-center space-x-2.5 bg-brand hover:bg-brand-dark text-white px-6 py-3 sm:px-8 sm:py-4 text-xs font-semibold uppercase tracking-widest rounded-xs shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 group"
+              className="inline-flex items-center justify-center space-x-2 bg-brand hover:bg-brand-dark text-white px-6 py-3 sm:px-8 sm:py-3.5 text-xs font-semibold uppercase tracking-widest rounded-xs shadow-md hover:shadow-lg transition-all duration-300 group"
             >
               <span>Explore The Collection</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
 
             <Link
               to="/visit-store"
-              className="inline-flex items-center justify-center space-x-2 bg-black/40 hover:bg-white hover:text-dark text-white border border-white/40 hover:border-white px-5 py-3 sm:px-7 sm:py-4 text-xs font-semibold uppercase tracking-widest rounded-xs backdrop-blur-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+              className="inline-flex items-center justify-center space-x-1.5 bg-black/30 hover:bg-white hover:text-dark text-white/90 border border-white/30 hover:border-white px-5 py-3 sm:px-6 sm:py-3.5 text-xs font-medium uppercase tracking-widest rounded-xs backdrop-blur-xs transition-all duration-300"
             >
               <MapPin className="w-3.5 h-3.5 text-brand" />
               <span>Visit Our Store</span>
@@ -215,76 +192,45 @@ export const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Slideshow Progress Bar, Category Pill & Navigation Controls */}
-      <div className="absolute bottom-3 sm:bottom-6 left-3 sm:left-8 md:left-12 z-30 flex items-center space-x-2 sm:space-x-4 bg-black/75 backdrop-blur-md border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-full text-white text-[10px] sm:text-xs shadow-2xl max-w-[calc(100%-24px)] sm:max-w-none">
-        
-        {/* Current Category Label Badge */}
-        <div className="flex items-center space-x-1.5 sm:space-x-2 pr-2 sm:pr-3 border-r border-neutral-700">
-          <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
-          <span className="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-ivory truncate max-w-[110px] sm:max-w-[200px]">
-            {HERO_SLIDES[currentIndex].category}
-          </span>
-        </div>
+      {/* Simplified, Minimalist Carousel Controls: Elegant Dots & Subtle Counter */}
+      <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-8 z-30 flex items-center space-x-2.5 text-white/80">
+        {/* Subtle Category Tag */}
+        <span className="text-[10px] uppercase tracking-wider text-white/70 font-medium hidden sm:inline mr-1">
+          {HERO_SLIDES[currentIndex].category}
+        </span>
 
-        {/* Slide Indicator Pills */}
+        {/* Small Elegant Pagination Dots */}
         <div className="flex items-center space-x-1.5">
           {HERO_SLIDES.map((slide, idx) => (
             <button
               key={slide.id}
               onClick={() => setCurrentIndex(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              className={`h-1 rounded-full transition-all duration-300 ${
                 idx === currentIndex
-                  ? 'w-6 bg-brand'
-                  : 'w-1.5 bg-neutral-500 hover:bg-neutral-300'
+                  ? 'w-5 bg-brand'
+                  : 'w-1.5 bg-white/40 hover:bg-white/75'
               }`}
               aria-label={`Jump to slide ${idx + 1}: ${slide.category}`}
             />
           ))}
         </div>
 
-        {/* Counter */}
-        <span className="text-[10px] text-neutral-300 font-mono tracking-wider">
-          0{currentIndex + 1}/0{HERO_SLIDES.length}
+        {/* Subtle Slide Counter */}
+        <span className="text-[10px] text-white/50 font-mono tracking-wider ml-1">
+          0{currentIndex + 1} / 0{HERO_SLIDES.length}
         </span>
-
-        {/* Previous / Next & Pause Controls */}
-        <div className="flex items-center space-x-1 pl-2 border-l border-neutral-700">
-          <button
-            onClick={goToPrev}
-            className="p-1 rounded-full text-neutral-300 hover:text-white hover:bg-white/20 transition-colors"
-            aria-label="Previous Slide"
-          >
-            <ChevronLeft className="w-3.5 h-3.5" />
-          </button>
-
-          <button
-            onClick={() => setIsPlaying(!isPlaying)}
-            className="p-1 rounded-full text-neutral-300 hover:text-white hover:bg-white/20 transition-colors"
-            aria-label={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
-          >
-            {isPlaying ? <Pause className="w-3 h-3 text-brand" /> : <Play className="w-3 h-3 text-emerald-400" />}
-          </button>
-
-          <button
-            onClick={goToNext}
-            className="p-1 rounded-full text-neutral-300 hover:text-white hover:bg-white/20 transition-colors"
-            aria-label="Next Slide"
-          >
-            <ChevronRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
       </div>
 
-      {/* Floating Bottom Quick Fact Bar */}
-      <div className="hidden lg:block absolute bottom-0 right-0 max-w-md bg-white/95 backdrop-blur-md p-6 border-t border-l border-neutral-200 z-30 text-dark shadow-xl">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] uppercase tracking-widest text-brand font-bold">
+      {/* Desktop Bottom Tag (Hidden on mobile) */}
+      <div className="hidden lg:block absolute bottom-0 right-0 max-w-xs bg-white/95 backdrop-blur-md px-5 py-3.5 border-t border-l border-neutral-200 z-30 text-dark shadow-sm">
+        <div className="flex items-center space-x-1.5">
+          <Sparkles className="w-3.5 h-3.5 text-brand" />
+          <span className="text-[10px] uppercase tracking-widest text-dark font-bold">
             The Fixed Price Shop
           </span>
-          <Sparkles className="w-4 h-4 text-brand" />
         </div>
-        <p className="text-xs text-neutral-600 leading-relaxed">
-          No artificial inflation. Direct manufacturer pricing and uncompromising quality on every stitch.
+        <p className="text-[11px] text-neutral-500 mt-0.5">
+          Fair pricing, uncompromised quality on every garment.
         </p>
       </div>
     </section>
