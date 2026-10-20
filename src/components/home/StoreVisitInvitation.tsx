@@ -100,26 +100,30 @@ export const StoreVisitInvitation: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: High Quality Photographic Representation */}
-            <div className="lg:col-span-5 relative min-h-[360px] lg:min-h-full bg-neutral-900 overflow-hidden">
+            {/* Right Column: Actual Storefront Photograph */}
+            <div className="lg:col-span-5 relative min-h-[400px] lg:min-h-full bg-neutral-100 overflow-hidden group">
               <img
-                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=85&w=1200&auto=format&fit=crop"
-                alt="1st Look Garments Storefront and Interior"
+                src="/assets/1st-look-garments-store.jpg"
+                alt="1st Look Garments Storefront in Ghanta Ghar Ghaziabad"
                 loading="lazy"
-                className="w-full h-full object-cover object-center opacity-85"
+                className="w-full h-full object-cover object-[center_20%] transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent"></div>
+              {/* Subtle bottom vignette to ensure caption readability without darkening the storefront or signboard */}
+              <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-dark/90 via-dark/35 to-transparent pointer-events-none" />
 
               {/* Overlay Badge */}
-              <div className="absolute bottom-8 left-8 right-8 text-white">
-                <span className="text-[10px] uppercase tracking-widest text-brand font-bold block mb-1">
-                  Ghanta Ghar Ghaziabad
-                </span>
-                <h3 className="font-editorial text-2xl font-normal text-white">
+              <div className="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
+                <div className="inline-flex items-center space-x-1.5 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-xs border border-white/10 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[10px] uppercase tracking-widest text-brand font-bold">
+                    Official Storefront • Ghanta Ghar
+                  </span>
+                </div>
+                <h3 className="font-editorial text-2xl font-normal text-white drop-shadow-sm">
                   Visit Us in Person
                 </h3>
-                <p className="text-xs text-neutral-300 mt-1 font-light leading-relaxed">
-                  Experience our complete fabric and fit library with personal styling guidance.
+                <p className="text-xs text-neutral-200 mt-1 font-light leading-relaxed drop-shadow-sm max-w-sm">
+                  Experience our complete fabric and fit collection in person at Ramanuj Dayal Market.
                 </p>
               </div>
             </div>

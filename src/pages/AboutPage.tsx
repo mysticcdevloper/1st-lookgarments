@@ -49,11 +49,11 @@ export const AboutPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-12 border-y border-borderSoft">
           
           <div className="lg:col-span-6 relative">
-            <div className="aspect-[4/3] rounded-xs overflow-hidden shadow-xl border border-neutral-200">
+            <div className="aspect-[4/3] rounded-xs overflow-hidden shadow-xl border border-neutral-200 group">
               <img
-                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=85&w=1200&auto=format&fit=crop"
-                alt="1st Look Garments Storefront in Ghaziabad"
-                className="w-full h-full object-cover"
+                src="/assets/1st-look-garments-store.jpg"
+                alt="1st Look Garments Storefront in Ghanta Ghar Ghaziabad"
+                className="w-full h-full object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-dark text-white p-6 rounded-xs shadow-xl hidden sm:block max-w-xs border-l-4 border-brand">
