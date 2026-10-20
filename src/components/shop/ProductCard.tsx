@@ -76,39 +76,34 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </p>
         </div>
 
-        {/* Available Sizes & Colors Preview */}
+        {/* Available Sizes & Action Link (Prices removed per store policy) */}
         <div className="mt-3 pt-3 border-t border-neutral-100 flex items-center justify-between">
-          <div className="flex items-center space-x-1">
-            <span className="text-[10px] text-neutral-400 font-medium mr-1 uppercase">Sizes:</span>
-            {product.sizes.slice(0, 3).map((sz) => (
-              <span key={sz} className="text-[10px] border border-neutral-200 px-1.5 py-0.5 rounded-2xs text-neutral-600">
+          <div className="flex items-center space-x-1.5 flex-wrap">
+            <span className="text-[10px] text-neutral-400 font-semibold uppercase tracking-wider">Sizes:</span>
+            {product.sizes.slice(0, 4).map((sz) => (
+              <span 
+                key={sz} 
+                className="text-[10px] border border-neutral-200 px-1.5 py-0.5 rounded-2xs text-neutral-700 bg-neutral-50/70 font-medium"
+              >
                 {sz}
               </span>
             ))}
-            {product.sizes.length > 3 && (
-              <span className="text-[10px] text-neutral-400 font-medium">+{product.sizes.length - 3}</span>
+            {product.sizes.length > 4 && (
+              <span className="text-[10px] text-neutral-400 font-medium">+{product.sizes.length - 4}</span>
             )}
           </div>
 
-          {/* Price display */}
-          <div className="text-right">
-            {product.price ? (
-              <div className="flex items-baseline space-x-1.5">
-                {product.originalPrice && (
-                  <span className="text-[11px] text-neutral-400 line-through">
-                    ₹{product.originalPrice.toLocaleString('en-IN')}
-                  </span>
-                )}
-                <span className="text-sm font-bold text-dark font-sans">
-                  ₹{product.price.toLocaleString('en-IN')}
-                </span>
-              </div>
-            ) : (
-              <span className="text-xs font-semibold text-brand tracking-wider uppercase">
-                Ask for Price
-              </span>
-            )}
-          </div>
+          {/* Clean Editorial Action replacing price with seamless alignment */}
+          <Link
+            to={`/product/${product.slug}`}
+            className="text-right shrink-0 pl-2 group/action"
+            title={`View ${product.name}`}
+          >
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-neutral-500 group-hover:text-brand transition-colors inline-flex items-center">
+              <span>View Piece</span>
+              <ArrowUpRight className="w-3.5 h-3.5 ml-0.5 text-neutral-400 group-hover:text-brand group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </span>
+          </Link>
         </div>
 
       </div>

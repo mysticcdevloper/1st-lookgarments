@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { HeroSection } from '../components/home/HeroSection';
 import { BrandPhilosophy } from '../components/home/BrandPhilosophy';
+import { FashionVideoShowcase } from '../components/home/FashionVideoShowcase';
 import { CategoryGallery } from '../components/home/CategoryGallery';
 import { FashionEditorial } from '../components/home/FashionEditorial';
 import { StoreVisitInvitation } from '../components/home/StoreVisitInvitation';
@@ -23,6 +24,11 @@ export const HomePage: React.FC = () => {
       {/* Brand Philosophy & Slogan */}
       <ScrollReveal>
         <BrandPhilosophy />
+      </ScrollReveal>
+
+      {/* Premium Fashion Video Showcase: The Art of Dressing Well */}
+      <ScrollReveal>
+        <FashionVideoShowcase />
       </ScrollReveal>
 
       {/* Shop By Category Gallery */}
