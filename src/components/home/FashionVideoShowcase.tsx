@@ -12,7 +12,8 @@ import {
   Layers, 
   Shirt, 
   Instagram,
-  MapPin
+  MapPin,
+  Crown
 } from 'lucide-react';
 
 interface GarmentPillar {
@@ -52,23 +53,30 @@ const GARMENT_PILLARS: GarmentPillar[] = [
 ];
 
 export const FashionVideoShowcase: React.FC = () => {
-  // Video 1: Fashion Editorial Runway Video (Existing preserved)
+  // Video 1: Fashion Editorial Runway Video (Preserved)
   const videoRef1 = useRef<HTMLVideoElement>(null);
   const [isPlaying1, setIsPlaying1] = useState<boolean>(true);
   const [isMuted1, setIsMuted1] = useState<boolean>(true);
   const [hasError1, setHasError1] = useState<boolean>(false);
 
-  // Video 2: Actual Shop Video (Added as requested)
+  // Video 2: Authentic Shop Tour Video (Preserved)
   const videoRef2 = useRef<HTMLVideoElement>(null);
   const [isPlaying2, setIsPlaying2] = useState<boolean>(false);
   const [isMuted2, setIsMuted2] = useState<boolean>(true);
   const [hasError2, setHasError2] = useState<boolean>(false);
+
+  // Video 3: Festive & Sizing Showcase M-10XL Video (Added)
+  const videoRef3 = useRef<HTMLVideoElement>(null);
+  const [isPlaying3, setIsPlaying3] = useState<boolean>(false);
+  const [isMuted3, setIsMuted3] = useState<boolean>(true);
+  const [hasError3, setHasError3] = useState<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Posters
   const fashionPoster = 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=85&w=1200&auto=format&fit=crop';
   const shopPoster = '/assets/1st-look-shop-video-poster.jpg';
+  const festivePoster = '/assets/1st-look-festive-video-poster.jpg';
 
   // IntersectionObserver for responsive lazy playback
   useEffect(() => {
@@ -85,17 +93,25 @@ export const FashionVideoShowcase: React.FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          // Play video 1 by default when visible
           v1.play().then(() => setIsPlaying1(true)).catch(() => setIsPlaying1(false));
         } else {
-          v1.pause();
-          setIsPlaying1(false);
+          // Pause all videos when scrolled out of view
+          if (videoRef1.current && !videoRef1.current.paused) {
+            videoRef1.current.pause();
+            setIsPlaying1(false);
+          }
           if (videoRef2.current && !videoRef2.current.paused) {
             videoRef2.current.pause();
             setIsPlaying2(false);
           }
+          if (videoRef3.current && !videoRef3.current.paused) {
+            videoRef3.current.pause();
+            setIsPlaying3(false);
+          }
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.2 }
     );
 
     if (containerRef.current) {
@@ -107,14 +123,24 @@ export const FashionVideoShowcase: React.FC = () => {
     };
   }, []);
 
+  // Controls for Video 1 (Fashion Runway Film)
   const togglePlay1 = () => {
-    const v = videoRef1.current;
-    if (!v) return;
+    const v1 = videoRef1.current;
+    if (!v1) return;
 
-    if (v.paused) {
-      v.play().then(() => setIsPlaying1(true)).catch(() => setIsPlaying1(false));
+    if (v1.paused) {
+      // Pause other videos to avoid competing audio
+      if (videoRef2.current && !videoRef2.current.paused) {
+        videoRef2.current.pause();
+        setIsPlaying2(false);
+      }
+      if (videoRef3.current && !videoRef3.current.paused) {
+        videoRef3.current.pause();
+        setIsPlaying3(false);
+      }
+      v1.play().then(() => setIsPlaying1(true)).catch(() => setIsPlaying1(false));
     } else {
-      v.pause();
+      v1.pause();
       setIsPlaying1(false);
     }
   };
@@ -126,19 +152,24 @@ export const FashionVideoShowcase: React.FC = () => {
     setIsMuted1(v.muted);
   };
 
+  // Controls for Video 2 (Authentic Shop Tour)
   const togglePlay2 = () => {
-    const v = videoRef2.current;
-    if (!v) return;
+    const v2 = videoRef2.current;
+    if (!v2) return;
 
-    if (v.paused) {
-      // Pause other video to avoid competing audio
+    if (v2.paused) {
+      // Pause other videos to avoid competing audio
       if (videoRef1.current && !videoRef1.current.paused) {
         videoRef1.current.pause();
         setIsPlaying1(false);
       }
-      v.play().then(() => setIsPlaying2(true)).catch(() => setIsPlaying2(false));
+      if (videoRef3.current && !videoRef3.current.paused) {
+        videoRef3.current.pause();
+        setIsPlaying3(false);
+      }
+      v2.play().then(() => setIsPlaying2(true)).catch(() => setIsPlaying2(false));
     } else {
-      v.pause();
+      v2.pause();
       setIsPlaying2(false);
     }
   };
@@ -148,6 +179,35 @@ export const FashionVideoShowcase: React.FC = () => {
     if (!v) return;
     v.muted = !v.muted;
     setIsMuted2(v.muted);
+  };
+
+  // Controls for Video 3 (Festive & Sizing Showcase)
+  const togglePlay3 = () => {
+    const v3 = videoRef3.current;
+    if (!v3) return;
+
+    if (v3.paused) {
+      // Pause other videos to avoid competing audio
+      if (videoRef1.current && !videoRef1.current.paused) {
+        videoRef1.current.pause();
+        setIsPlaying1(false);
+      }
+      if (videoRef2.current && !videoRef2.current.paused) {
+        videoRef2.current.pause();
+        setIsPlaying2(false);
+      }
+      v3.play().then(() => setIsPlaying3(true)).catch(() => setIsPlaying3(false));
+    } else {
+      v3.pause();
+      setIsPlaying3(false);
+    }
+  };
+
+  const toggleMute3 = () => {
+    const v = videoRef3.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setIsMuted3(v.muted);
   };
 
   return (
@@ -189,11 +249,11 @@ export const FashionVideoShowcase: React.FC = () => {
           </Link>
         </div>
 
-        {/* Dual Video Showcase: Video 1 (Fashion Film) & Video 2 (Our Store) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch mb-12">
+        {/* 3-Video Showcase Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch mb-12">
           
-          {/* Card 1: Existing Preserved Fashion Film */}
-          <div className="relative rounded-xs overflow-hidden bg-neutral-900 border border-white/10 shadow-2xl flex flex-col justify-between group min-h-[340px] sm:min-h-[440px]">
+          {/* Card 1: Existing Preserved Fashion Runway Film */}
+          <div className="relative rounded-xs overflow-hidden bg-neutral-900 border border-white/10 shadow-2xl flex flex-col justify-between group min-h-[380px] sm:min-h-[460px] transition-transform duration-300 hover:border-white/20">
             
             {/* Native Video 1 */}
             <video
@@ -217,20 +277,20 @@ export const FashionVideoShowcase: React.FC = () => {
             )}
 
             {/* Subtle Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/45 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/50 pointer-events-none" />
 
             {/* Top Bar: Label & Mute Toggle */}
-            <div className="relative z-20 p-4 sm:p-6 flex items-center justify-between">
+            <div className="relative z-20 p-4 sm:p-5 flex items-center justify-between">
               <span className="inline-flex items-center space-x-1.5 text-[10px] uppercase tracking-widest font-bold text-white/95 bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-xs border border-white/10">
                 <Sparkles className="w-3 h-3 text-brand" />
-                <span>Editorial Runway & Garments</span>
+                <span>Runway & Garments</span>
               </span>
 
               <button
                 onClick={toggleMute1}
                 className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md text-white border border-white/20 flex items-center justify-center transition-all hover:scale-105"
                 title={isMuted1 ? 'Unmute Audio' : 'Mute Audio'}
-                aria-label={isMuted1 ? 'Unmute Video Audio' : 'Mute Video Audio'}
+                aria-label={isMuted1 ? 'Unmute Fashion Film Audio' : 'Mute Fashion Film Audio'}
               >
                 {isMuted1 ? <VolumeX className="w-4 h-4 text-neutral-300" /> : <Volume2 className="w-4 h-4 text-brand" />}
               </button>
@@ -240,45 +300,47 @@ export const FashionVideoShowcase: React.FC = () => {
             <div className="relative z-20 self-center my-auto py-3">
               <button
                 onClick={togglePlay1}
-                className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-brand/90 hover:bg-brand text-white shadow-2xl flex items-center justify-center backdrop-blur-md border border-white/20 transition-all duration-300 hover:scale-110 focus:outline-none"
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand/90 hover:bg-brand text-white shadow-2xl flex items-center justify-center backdrop-blur-md border border-white/20 transition-all duration-300 hover:scale-110 focus:outline-none"
                 title={isPlaying1 ? 'Pause Fashion Film' : 'Play Fashion Film'}
                 aria-label={isPlaying1 ? 'Pause Fashion Film' : 'Play Fashion Film'}
               >
                 {isPlaying1 ? (
-                  <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white" />
+                  <Pause className="w-5 h-5 text-white fill-white" />
                 ) : (
-                  <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white translate-x-0.5" />
+                  <Play className="w-5 h-5 text-white fill-white translate-x-0.5" />
                 )}
               </button>
             </div>
 
             {/* Bottom Overlay Info */}
-            <div className="relative z-20 p-4 sm:p-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div className="relative z-20 p-4 sm:p-5 flex flex-col justify-between gap-3">
               <div>
                 <span className="text-[10px] uppercase tracking-widest text-brand font-bold block mb-0.5">
                   Collection Film
                 </span>
-                <h3 className="font-editorial text-xl sm:text-2xl text-white font-normal">
+                <h3 className="font-editorial text-lg sm:text-xl text-white font-normal leading-snug">
                   Tailored Craft & Silhouette
                 </h3>
-                <p className="text-xs text-neutral-300 mt-1 max-w-sm font-light leading-relaxed">
+                <p className="text-xs text-neutral-300 mt-1 font-light leading-relaxed line-clamp-2">
                   Structured canvassing, sharp shoulder lines, and premium fabrics.
                 </p>
               </div>
 
-              <Link
-                to="/shop"
-                className="inline-flex items-center justify-center space-x-1.5 bg-white text-dark hover:bg-brand hover:text-white px-4 py-2 sm:px-4 sm:py-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors shrink-0 shadow-md"
-              >
-                <span>Explore Catalog</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
+              <div className="pt-2">
+                <Link
+                  to="/shop"
+                  className="inline-flex items-center justify-center space-x-1.5 w-full bg-white text-dark hover:bg-brand hover:text-white px-3.5 py-2 text-[11px] font-semibold uppercase tracking-widest rounded-xs transition-colors shadow-md"
+                >
+                  <span>Explore Catalog</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
 
           </div>
 
-          {/* Card 2: Actual Shop Video (EXPERIENCE OUR STORE) */}
-          <div className="relative rounded-xs overflow-hidden bg-neutral-900 border border-white/10 shadow-2xl flex flex-col justify-between group min-h-[340px] sm:min-h-[440px]">
+          {/* Card 2: Existing Preserved Authentic Shop Tour */}
+          <div className="relative rounded-xs overflow-hidden bg-neutral-900 border border-white/10 shadow-2xl flex flex-col justify-between group min-h-[380px] sm:min-h-[460px] transition-transform duration-300 hover:border-white/20">
             
             {/* Native Video 2 */}
             <video
@@ -302,39 +364,33 @@ export const FashionVideoShowcase: React.FC = () => {
             )}
 
             {/* Subtle Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/45 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/50 pointer-events-none" />
 
             {/* Top Bar: Official "OUR STORE" Label + Instagram Link & Sound Toggle */}
-            <div className="relative z-20 p-4 sm:p-6 flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <span className="inline-flex items-center space-x-1.5 text-[10px] uppercase tracking-widest font-bold text-white/95 bg-brand px-2.5 py-1 rounded-xs shadow-xs">
-                  <Store className="w-3 h-3" />
-                  <span>OUR STORE</span>
-                </span>
-                <span className="text-[10px] text-neutral-300 uppercase tracking-wider hidden xs:inline font-medium">
-                  Ghanta Ghar, Ghaziabad
-                </span>
-              </div>
+            <div className="relative z-20 p-4 sm:p-5 flex items-center justify-between">
+              <span className="inline-flex items-center space-x-1.5 text-[10px] uppercase tracking-widest font-bold text-white/95 bg-brand px-2.5 py-1 rounded-xs shadow-xs">
+                <Store className="w-3 h-3" />
+                <span>OUR STORE</span>
+              </span>
 
               <div className="flex items-center space-x-2">
-                {/* Link to Instagram post / reel */}
                 <a
                   href="https://www.instagram.com/p/DecHhLBgimP/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden sm:inline-flex items-center space-x-1 bg-black/50 hover:bg-black/80 backdrop-blur-md text-[10px] text-neutral-200 hover:text-white px-2.5 py-1 rounded-xs border border-white/15 transition-colors"
-                  title="Watch original Reel on Instagram"
+                  className="inline-flex items-center space-x-1 bg-black/50 hover:bg-black/80 backdrop-blur-md text-[10px] text-neutral-200 hover:text-white px-2.5 py-1 rounded-xs border border-white/15 transition-colors"
+                  title="Watch Store Tour Reel on Instagram"
                 >
                   <Instagram className="w-3 h-3 text-pink-400" />
-                  <span>Instagram</span>
-                  <ArrowUpRight className="w-3 h-3 ml-0.5" />
+                  <span className="hidden sm:inline">Instagram</span>
+                  <ArrowUpRight className="w-3 h-3" />
                 </a>
 
                 <button
                   onClick={toggleMute2}
                   className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md text-white border border-white/20 flex items-center justify-center transition-all hover:scale-105"
                   title={isMuted2 ? 'Unmute Audio' : 'Mute Audio'}
-                  aria-label={isMuted2 ? 'Unmute Video Audio' : 'Mute Video Audio'}
+                  aria-label={isMuted2 ? 'Unmute Store Tour Audio' : 'Mute Store Tour Audio'}
                 >
                   {isMuted2 ? <VolumeX className="w-4 h-4 text-neutral-300" /> : <Volume2 className="w-4 h-4 text-brand" />}
                 </button>
@@ -345,49 +401,141 @@ export const FashionVideoShowcase: React.FC = () => {
             <div className="relative z-20 self-center my-auto py-3">
               <button
                 onClick={togglePlay2}
-                className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-brand/90 hover:bg-brand text-white shadow-2xl flex items-center justify-center backdrop-blur-md border border-white/20 transition-all duration-300 hover:scale-110 focus:outline-none"
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand/90 hover:bg-brand text-white shadow-2xl flex items-center justify-center backdrop-blur-md border border-white/20 transition-all duration-300 hover:scale-110 focus:outline-none"
                 title={isPlaying2 ? 'Pause Store Tour' : 'Play Store Tour'}
                 aria-label={isPlaying2 ? 'Pause Store Tour' : 'Play Store Tour'}
               >
                 {isPlaying2 ? (
-                  <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white" />
+                  <Pause className="w-5 h-5 text-white fill-white" />
                 ) : (
-                  <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white translate-x-0.5" />
+                  <Play className="w-5 h-5 text-white fill-white translate-x-0.5" />
                 )}
               </button>
             </div>
 
             {/* Bottom Overlay Info */}
-            <div className="relative z-20 p-4 sm:p-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div className="relative z-20 p-4 sm:p-5 flex flex-col justify-between gap-3">
               <div>
                 <span className="text-[10px] uppercase tracking-widest text-brand font-bold block mb-0.5">
                   EXPERIENCE OUR STORE
                 </span>
-                <h3 className="font-editorial text-xl sm:text-2xl text-white font-normal">
+                <h3 className="font-editorial text-lg sm:text-xl text-white font-normal leading-snug">
                   Step Inside 1st Look Garments
                 </h3>
-                <p className="text-xs text-neutral-300 mt-1 max-w-sm font-light leading-relaxed">
+                <p className="text-xs text-neutral-300 mt-1 font-light leading-relaxed line-clamp-2">
                   Step inside 1st Look Garments and discover your next look.
                 </p>
               </div>
 
-              <div className="flex items-center space-x-2 shrink-0">
+              <div className="pt-2">
                 <Link
                   to="/visit-store"
-                  className="inline-flex items-center justify-center space-x-1.5 bg-brand hover:bg-brand-dark text-white px-4 py-2 sm:px-4 sm:py-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest rounded-xs transition-colors shadow-md"
+                  className="inline-flex items-center justify-center space-x-1.5 w-full bg-brand hover:bg-brand-dark text-white px-3.5 py-2 text-[11px] font-semibold uppercase tracking-widest rounded-xs transition-colors shadow-md"
                 >
                   <MapPin className="w-3.5 h-3.5" />
                   <span>Visit Store</span>
                 </Link>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Card 3: NEW Festive & Sizing Showcase (M to 10XL) */}
+          <div className="relative rounded-xs overflow-hidden bg-neutral-900 border border-white/10 shadow-2xl flex flex-col justify-between group min-h-[380px] sm:min-h-[460px] md:col-span-2 lg:col-span-1 transition-transform duration-300 hover:border-white/20">
+            
+            {/* Native Video 3 */}
+            <video
+              ref={videoRef3}
+              src="/assets/videos/1st-look-festive-video.mp4"
+              poster={festivePoster}
+              loop
+              muted={isMuted3}
+              playsInline
+              preload="metadata"
+              onError={() => setHasError3(true)}
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+            />
+
+            {hasError3 && (
+              <img
+                src={festivePoster}
+                alt="1st Look Garments Festive & All-Sizes Collection"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            )}
+
+            {/* Subtle Gradient Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/50 pointer-events-none" />
+
+            {/* Top Bar: Festive Badge + Instagram Link & Sound Toggle */}
+            <div className="relative z-20 p-4 sm:p-5 flex items-center justify-between">
+              <span className="inline-flex items-center space-x-1.5 text-[10px] uppercase tracking-widest font-bold text-white/95 bg-amber-600/90 backdrop-blur-md px-2.5 py-1 rounded-xs border border-amber-400/30">
+                <Crown className="w-3 h-3 text-amber-200" />
+                <span>Festive & All Sizes M–10XL</span>
+              </span>
+
+              <div className="flex items-center space-x-2">
                 <a
-                  href="https://www.instagram.com/p/DecHhLBgimP/"
+                  href="https://www.instagram.com/p/DefBDeRgeKo/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="sm:hidden inline-flex items-center justify-center p-2 bg-black/60 text-white rounded-xs border border-white/20"
-                  title="View on Instagram"
+                  className="inline-flex items-center space-x-1 bg-black/50 hover:bg-black/80 backdrop-blur-md text-[10px] text-neutral-200 hover:text-white px-2.5 py-1 rounded-xs border border-white/15 transition-colors"
+                  title="Watch Festive Collection on Instagram"
                 >
-                  <Instagram className="w-3.5 h-3.5 text-pink-400" />
+                  <Instagram className="w-3 h-3 text-pink-400" />
+                  <span className="hidden sm:inline">Instagram</span>
+                  <ArrowUpRight className="w-3 h-3" />
                 </a>
+
+                <button
+                  onClick={toggleMute3}
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md text-white border border-white/20 flex items-center justify-center transition-all hover:scale-105"
+                  title={isMuted3 ? 'Unmute Audio' : 'Mute Audio'}
+                  aria-label={isMuted3 ? 'Unmute Festive Showcase Audio' : 'Mute Festive Showcase Audio'}
+                >
+                  {isMuted3 ? <VolumeX className="w-4 h-4 text-neutral-300" /> : <Volume2 className="w-4 h-4 text-brand" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Center Big Play/Pause Toggle */}
+            <div className="relative z-20 self-center my-auto py-3">
+              <button
+                onClick={togglePlay3}
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand/90 hover:bg-brand text-white shadow-2xl flex items-center justify-center backdrop-blur-md border border-white/20 transition-all duration-300 hover:scale-110 focus:outline-none"
+                title={isPlaying3 ? 'Pause Festive Reel' : 'Play Festive Reel'}
+                aria-label={isPlaying3 ? 'Pause Festive Reel' : 'Play Festive Reel'}
+              >
+                {isPlaying3 ? (
+                  <Pause className="w-5 h-5 text-white fill-white" />
+                ) : (
+                  <Play className="w-5 h-5 text-white fill-white translate-x-0.5" />
+                )}
+              </button>
+            </div>
+
+            {/* Bottom Overlay Info */}
+            <div className="relative z-20 p-4 sm:p-5 flex flex-col justify-between gap-3">
+              <div>
+                <span className="text-[10px] uppercase tracking-widest text-amber-400 font-bold block mb-0.5">
+                  Ghaziabad Festive Showcase
+                </span>
+                <h3 className="font-editorial text-lg sm:text-xl text-white font-normal leading-snug">
+                  Festive Fits & Sizing M to 10XL
+                </h3>
+                <p className="text-xs text-neutral-300 mt-1 font-light leading-relaxed line-clamp-2">
+                  Complete fitting from M to 10XL in premium ethnic, festive, and casual menswear.
+                </p>
+              </div>
+
+              <div className="pt-2">
+                <Link
+                  to="/collections/ethnic-wear"
+                  className="inline-flex items-center justify-center space-x-1.5 w-full bg-white text-dark hover:bg-brand hover:text-white px-3.5 py-2 text-[11px] font-semibold uppercase tracking-widest rounded-xs transition-colors shadow-md"
+                >
+                  <span>Explore Festive Wear</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
 
