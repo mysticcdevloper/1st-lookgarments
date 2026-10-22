@@ -151,3 +151,82 @@
     transform: none !important;
   }
 }
+
+/* ==========================================================================
+   Mobile Header Logo Optimization for Android & Small Screens (320px - 480px)
+   Enlarges logo to 70-80px width & 60-65px height while strictly preserving 1:1 aspect ratio
+   ========================================================================== */
+.header-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 70px;
+  height: 60px;
+}
+
+.header-logo-img {
+  width: auto;
+  height: 60px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Android devices between 360px and 389px (e.g., Galaxy A-series, Vivo, Oppo) */
+@media screen and (min-width: 360px) and (max-width: 389px) {
+  .header-logo-container {
+    width: 74px;
+    height: 62px;
+  }
+  .header-logo-img {
+    height: 62px;
+  }
+}
+
+/* Android devices between 390px and 411px (e.g., Galaxy S22, Redmi Note, Pixel) */
+@media screen and (min-width: 390px) and (max-width: 411px) {
+  .header-logo-container {
+    width: 76px;
+    height: 64px;
+  }
+  .header-logo-img {
+    height: 64px;
+  }
+}
+
+/* Large Android devices between 412px and 480px (e.g., Pixel 7/8/9, Galaxy Ultra) */
+@media screen and (min-width: 412px) and (max-width: 480px) {
+  .header-logo-container {
+    width: 80px;
+    height: 65px;
+  }
+  .header-logo-img {
+    height: 65px;
+  }
+}
+
+/* Tablet & Desktop Viewports: Keep refined compact proportions */
+@media screen and (min-width: 640px) {
+  .header-logo-container {
+    width: 44px;
+    height: 44px;
+  }
+  .header-logo-img {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .header-logo-container {
+    width: 48px;
+    height: 48px;
+  }
+  .header-logo-img {
+    width: 48px;
+    height: 48px;
+  }
+}
+

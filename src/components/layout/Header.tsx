@@ -61,8 +61,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
           : 'bg-white border-b border-borderSoft py-2.5 sm:py-3'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between min-h-[52px] sm:min-h-[60px] gap-2 lg:gap-4 xl:gap-8">
+      <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between min-h-[64px] xs:min-h-[68px] sm:min-h-[64px] lg:min-h-[60px] gap-2 lg:gap-4 xl:gap-8">
           
           {/* Left Brand Identity: Official Logo + "1ST LOOK GARMENTS" */}
           <Link 
@@ -70,21 +70,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             className="flex items-center group transition-transform hover:opacity-95 shrink-0 mr-2 xl:mr-4"
             aria-label="1st Look Garments Homepage"
           >
-            {/* Official Circular Logo */}
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-neutral-200/90 shadow-2xs shrink-0 bg-white flex items-center justify-center">
+            {/* Official Logo with dedicated responsive sizing for Android mobile */}
+            <div className="header-logo-container relative shrink-0">
               <img
                 src="/assets/logo.png"
                 alt="1st Look Garments Official Logo"
-                className="w-full h-full object-contain p-0.5 group-hover:scale-105 transition-transform duration-300"
+                className="header-logo-img transition-transform duration-300 group-hover:scale-105"
               />
             </div>
 
             {/* Shop Name in Elegant Editorial Typography */}
-            <div className="ml-2.5 sm:ml-3 flex flex-col justify-center">
-              <span className="font-editorial text-sm sm:text-base md:text-lg xl:text-xl font-bold tracking-tight text-dark leading-none group-hover:text-brand transition-colors whitespace-nowrap">
+            <div className="ml-2 xs:ml-2.5 sm:ml-3 flex flex-col justify-center min-w-0">
+              <span className="font-editorial text-sm xs:text-[15px] sm:text-base md:text-lg xl:text-xl font-bold tracking-tight text-dark leading-tight group-hover:text-brand transition-colors whitespace-nowrap">
                 1ST LOOK GARMENTS
               </span>
-              <span className="text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.16em] uppercase text-neutral-400 font-medium leading-tight mt-0.5 whitespace-nowrap">
+              <span className="text-[8px] xs:text-[8.5px] sm:text-[9px] md:text-[10px] tracking-[0.14em] uppercase text-neutral-400 font-medium leading-tight mt-0.5 whitespace-nowrap">
                 Ghanta Ghar • Ghaziabad
               </span>
             </div>
